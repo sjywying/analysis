@@ -1,4 +1,4 @@
-package egox.ext.fastjson;
+package com.analysis.web.common.util;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

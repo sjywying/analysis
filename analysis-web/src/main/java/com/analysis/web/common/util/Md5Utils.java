@@ -1,4 +1,4 @@
-package egox.util;
+package com.analysis.web.common.util;
 
 
 import org.slf4j.Logger;

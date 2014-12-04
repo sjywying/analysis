@@ -1,4 +1,4 @@
-package egox.shiro;
+package com.analysis.web.shiro;
 
 import egox.sm.bean.User;
 import egox.sm.service.RoleService;

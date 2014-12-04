@@ -67,7 +67,7 @@
         <property name="defaultViews">  
             <list>  
                 <!-- for application/json -->  
-                <bean class="egox.ext.fastjson.FastJsonJsonView" />
+                <bean class="com.analysis.web.common.util.FastJsonJsonView" />
                 <!--<bean class="com.alibaba.fastjson.support.spring.FastJsonJsonView" />-->
 
                 <!-- for application/xml -->  

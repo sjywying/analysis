@@ -5,10 +5,13 @@ import egox.sm.bean.User;
 import egox.sm.bean.UserExample;
 import egox.sm.dao.UserMapper;
 import egox.sm.service.UserService;
-import egox.util.Md5Utils;
+
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.analysis.web.common.util.Md5Utils;
 
 /**
  *
