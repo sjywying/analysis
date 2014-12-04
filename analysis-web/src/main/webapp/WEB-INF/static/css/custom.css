@@ -1,0 +1,167 @@
+/* ------------------Put your custom code here--------------------*/
+
+.control-label {font-weight: bold;}
+form .control-group:last-child {margin-bottom: 0;}
+form .control-group .controls-row {	margin-bottom: 5px;}
+form .control-group .controls-row textarea {margin-bottom: 15px;}
+form .control-group .controls-row .btn.special {margin-left: 10px;}
+
+@media only screen and (max-width: 1360px) {
+    /* ------------------ Form styles --------------------*/
+    [class*="span6"] form .control-group .control-label {width: 120px;}
+    [class*="span6"] form .control-group .controls {margin-left: 150px;}
+}
+
+@media only screen and (max-width: 1280px) {
+    /* ------------------ Form styles --------------------*/
+    [class*="span6"] form .control-group .control-label {width: 100%; text-align: left;margin-bottom: 5px;}
+    [class*="span6"] form .control-group .controls {margin-left: 0;}
+    [class*="span6"] form .control-group {margin-bottom: 10px;}
+    [class*="span6"] form .form-actions {padding-left: 20px;}
+}
+
+@media only screen and (max-width: 767px) {
+    /* ------------------ Form styles--------------------*/
+    form .control-group [class*="span"] {margin-bottom: 10px !important;}
+    form .control-group .control-label {width: 100%; text-align: left;margin-bottom: 5px;}
+    form .control-group .controls {margin-left: 0;}
+    form .control-group {margin-bottom: 10px;}
+    form .form-actions {padding-left: 20px;}
+    form .control-group .controls-row [class*="span"] {margin-left: 0 !important;}
+    form .control-group .controls-row .btn.special {margin-left: 0px;}
+}
+
+
+
+
+
+
+
+#mainContainer {
+    padding: 0 !important; /* override Layout default of '0' */
+    /* set min dimensions for layout - window will scroll if smaller than this */
+    min-height:	700px;
+    /* max-width works for left-aligned layout - need a container-div to 'center' the layout */
+    /*max-width:		1000px;*/
+}
+/*
+ *	TAB CLASSES - STRUCTURAL, REQUIRED
+ */
+DIV#tabContainer { /* page-wrapper - used ONLY to 'wrap' tabButtons and tabPanels */
+    position: static !important; /* overide UI Theme - prevent from becoming a positional wrapper */
+    padding: 0;
+    overflow: hidden;
+}
+UL#tabButtons , DIV#tabPanels {
+    margin: 0 !important; /* layout-panes should never have margins */
+    padding: 0;
+    overflow: hidden;
+}
+
+/* custom css */
+.heading #tabHeader {
+    position: relative;
+    padding: 0.2em;
+}
+.heading #tabHeader>ul {
+    margin: 0;
+    padding: .2em .2em 0;
+}
+.heading #tabHeader>ul li {
+    cursor: pointer;
+    list-style: none;
+    float: left;
+    position: relative;
+    top: 0px;
+    margin: 1px 0.2em 0px 0px;
+    padding: 0px;
+    white-space: nowrap;
+}
+
+.heading #tabHeader>ul li a {
+    float: left;
+    padding: 0.8em 0.3em 1em 0.5em;
+    font-weight: bolder;
+    text-decoration: none;
+    color: #353535;
+}
+.heading #tabHeader>ul>li {
+    height: 3em;
+    border: 1px solid rgb(196, 196, 196);
+    border-bottom-width: 0px;
+    font-weight: normal;
+    color: rgb(53, 53, 53);
+}
+.heading #tabHeader>ul>li.tab-active {
+    background: snow;
+}
+.heading #tabHeader>ul>li.tab-active a {
+    background: snow;
+    cursor: text;
+    margin-bottom: -1px;
+    padding-bottom: 1px;
+}
+.heading #tabHeader>ul>li.nav-left,
+.heading #tabHeader>ul>li.nav-right {
+    border-bottom-width: thick !important;
+}
+.heading #tabHeader>ul>li.nav-left a,
+.heading #tabHeader>ul>li.nav-right a {
+    padding-top: 0.6em !important;
+}
+.heading #tabHeader>ul>li.nav-right {
+    margin-right: 10px !important;
+}
+
+.heading #tabHeader>ul>li ul {
+    float: left;
+    padding-left: 1px;
+    width: 20px;
+}
+
+.heading #tabHeader>ul>li>ul>li {
+    float: none;
+}
+
+.heading #tabHeader>ul>li>ul>li b {
+    cursor: pointer;
+    float: left;
+    margin: 2px;
+}
+
+.heading #tabHeader>ul>li>ul.single-li>li b {
+    margin-top: 0.9em;
+}
+
+.contentwrapper {
+    padding-top: 0px;
+}
+
+.alert {
+    padding: 8px 35px 8px 14px;
+    margin-bottom: 18px;
+    color: #c09853;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+    background-color: #fcf8e3;
+    border: 1px solid #fbeed5;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+}
+
+.alert-error {
+    color: #b94a48;
+    background-color: #f2dede;
+    border-color: #eed3d7;
+}
+
+.alert-success {
+    color: #468847;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+}
+.alert-info {
+    color: #3a87ad;
+    background-color: #d9edf7;
+    border-color: #bce8f1;
+}

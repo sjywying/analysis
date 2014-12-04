@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="egox.sm.dao.ActiveMapper">
+  <resultMap id="ActiveMap" type="egox.sm.bean.Active">
+    <result column="yyyymm" jdbcType="VARCHAR" property="yyyymm" />
+    <result column="channel" jdbcType="VARCHAR" property="channel" />
+    <result column="model" jdbcType="VARCHAR" property="model" />
+    <result column="num" jdbcType="INTEGER" property="num" />
+  </resultMap>
+  
+  <select id="selectByChannelAndModel" resultMap="ActiveMap">
+  	select yyyymm, channel, model, num from biz_active where channel=#{channel} 
+  		<if test="model != null">
+  			and model=#{model} 
+  		</if>
+  	order by yyyymm
+  </select>
+</mapper>
