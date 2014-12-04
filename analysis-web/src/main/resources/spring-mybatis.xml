@@ -71,7 +71,7 @@
     <bean id="druid-stat-pointcut" class="org.springframework.aop.support.JdkRegexpMethodPointcut" scope="prototype">
         <property name="patterns">
             <list>
-                <value>egox.sm.service.*</value>
+                <value>com.analysis.web.service.*</value>
             </list>
         </property>
     </bean>
@@ -107,7 +107,7 @@
         </tx:attributes>
     </tx:advice>
     <aop:config>
-        <aop:pointcut id="transactionPointcut" expression="execution(* egox.sm.service..*Impl.*(..))" />
+        <aop:pointcut id="transactionPointcut" expression="execution(* com.analysis.web.service..*Impl.*(..))" />
         <aop:advisor pointcut-ref="transactionPointcut" advice-ref="transactionAdvice" />
     </aop:config>
     
@@ -125,7 +125,7 @@
     <!-- MyBatis 接口编程配置  -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">    
         <!-- basePackage指定要扫描的包，在此包之下的映射器都会被搜索到,可指定多个包，包与包之间用逗号或分号分隔-->
-        <property name="basePackage" value="egox.sm.dao" />
+        <property name="basePackage" value="com.analysis.web.dao" />
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
     </bean>
  
