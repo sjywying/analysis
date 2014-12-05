@@ -1,0 +1,134 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<!-- ARTIFACT SECTION -->
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>analysis-collect-plugin</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<groupId>com.analysis</groupId>
+	<packaging>jar</packaging>
+	<name>analysis-collect-plugin</name>
+
+	<properties>
+		<!-- junit -->
+		<junit>4.11</junit>
+
+		<!-- maven -->
+		<maven.encoding>UTF-8</maven.encoding>
+		<maven.jdk>1.6</maven.jdk>
+		<maven.compiler>3.0</maven.compiler>
+		<maven.resources>2.5</maven.resources>
+		<maven.surefire>2.12</maven.surefire>
+		<maven.dependency>2.8</maven.dependency>
+
+		<!-- flume -->
+		<flume>1.5.2</flume>
+
+		<!-- log -->
+		<slf4j>1.6.1</slf4j>
+		<log4j>1.2.16</log4j>
+		<logback>1.0.13</logback>
+
+		<!-- kafka -->
+		<kafka>0.8.0-beta1</kafka>
+		<scala>2.9.2</scala>
+		<metrics>2.2.0</metrics>
+	</properties>
+
+	<dependencies>
+
+		<!-- flume -->
+		<dependency>
+			<groupId>org.apache.flume</groupId>
+			<artifactId>flume-ng-sdk</artifactId>
+			<version>${flume}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.flume</groupId>
+			<artifactId>flume-ng-core</artifactId>
+			<version>${flume}</version>
+		</dependency>
+
+		<!-- kafka -->
+		<dependency>
+			<groupId>org.apache.kafka</groupId>
+			<artifactId>kafka_2.9.2</artifactId>
+			<version>${kafka}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.scala-lang</groupId>
+			<artifactId>scala-library</artifactId>
+			<version>${scala}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.scala-lang</groupId>
+			<artifactId>scala-compiler</artifactId>
+			<version>${scala}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.yammer.metrics</groupId>
+			<artifactId>metrics-core</artifactId>
+			<version>${metrics}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.yammer.metrics</groupId>
+			<artifactId>metrics-annotation</artifactId>
+			<version>${metrics}</version>
+		</dependency>
+
+		<!-- zookeeper -->
+		<dependency>
+			<groupId>com.github.sgroschupf</groupId>
+			<artifactId>zkclient</artifactId>
+			<version>0.1</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<finalName>analysis-collect-plugin</finalName>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+				<excludes>
+					<exclude>**/*.xml</exclude>
+				</excludes>
+			</resource>
+		</resources>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>2.3.1</version>
+				<configuration>
+					<outputDirectory>${project.basedir}/package</outputDirectory>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<version>${maven.dependency}</version>
+				<executions>
+					<execution>
+						<id>copy-dependencies</id>
+						<phase>package</phase>
+						<goals>
+							<goal>copy-dependencies</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.basedir}/libs</outputDirectory>
+							<overWriteReleases>false</overWriteReleases>
+							<overWriteSnapshots>false</overWriteSnapshots>
+							<overWriteIfNewer>true</overWriteIfNewer>
+							<includeArtifactIds>
+								kafka_2.9.2, scala-library, scala-compiler, metrics-core, metrics-annotation
+								, zkclient
+							</includeArtifactIds>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+</project>
+

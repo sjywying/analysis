@@ -1,0 +1,11 @@
+target/
+/nb-configuration.xml
+/.idea
+/nbactions.xml
+/**/*.iml
+/.settings
+.classpath
+.project
+bin/
+package/
+libs/
