@@ -68,7 +68,7 @@
     
     <!-- logback spring扩展 -->
     <listener>
-        <listener-class>ch.qos.logback.ext.spring.web.LogbackConfigListener</listener-class>
+        <listener-class>com.analysis.web.logback.ext.LogbackConfigListener</listener-class>
     </listener>
     <listener>
         <!-- 开启spring加载监听器功能 -->

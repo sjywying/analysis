@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ch.qos.logback.ext.spring;
+package com.analysis.web.logback.ext;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -45,9 +45,9 @@ import ch.qos.logback.core.joran.spi.JoranException;
  * @author Bryan Turner
  * @author Les Hazlewood
  * @author Knute Axelson
- * @see ch.qos.logback.ext.spring.web.WebLogbackConfigurer WebLogbackConfigurer
- * @see ch.qos.logback.ext.spring.web.LogbackConfigListener LogbackConfigListener
- * @see ch.qos.logback.ext.spring.web.LogbackConfigServlet LogbackConfigServlet
+ * @see com.analysis.web.logback.ext.WebLogbackConfigurer WebLogbackConfigurer
+ * @see com.analysis.web.logback.ext.LogbackConfigListener LogbackConfigListener
+ * @see com.analysis.web.logback.ext.LogbackConfigServlet LogbackConfigServlet
  * @since 0.1
  */
 public class LogbackConfigurer {
@@ -86,7 +86,7 @@ public class LogbackConfigurer {
      *
      * @param key system property key to use, as expected in Logback configuration
      *            (for example: "demo.root", used as "${demo.root}/WEB-INF/demo.log")
-     * @see ch.qos.logback.ext.spring.web.WebLogbackConfigurer WebLogbackConfigurer
+     * @see com.analysis.web.logback.ext.WebLogbackConfigurer WebLogbackConfigurer
      */
     public static void setWorkingDirSystemProperty(String key) {
         System.setProperty(key, new File("").getAbsolutePath());
