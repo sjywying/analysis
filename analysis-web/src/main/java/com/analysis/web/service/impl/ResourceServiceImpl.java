@@ -14,10 +14,6 @@ import com.analysis.web.dao.ResourceMapper;
 import com.analysis.web.service.ResourceService;
 import com.analysis.web.ui.Menu;
 
-/**
- *
- * @author Gavin
- */
 @Service("resourceService")
 public class ResourceServiceImpl implements ResourceService {
 

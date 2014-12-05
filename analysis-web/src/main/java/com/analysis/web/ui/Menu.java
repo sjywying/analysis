@@ -7,11 +7,12 @@ import java.util.List;
 /**
  * 左边菜单列表
  *
- * @author Gavin
  */
 public class Menu implements Serializable {
 
-    private Long id;
+	private static final long serialVersionUID = 1L;
+	
+	private Long id;
     private String name;
     private String url;
     private String icon;

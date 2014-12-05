@@ -11,17 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.analysis.web.bean.Active;
 import com.analysis.web.service.ActiveService;
 import com.analysis.web.ui.Menu;
 
-/**
- *
- * @author Gavin <egox.vip@gmail.com>
- */
 @Controller()
 @RequestMapping(value = "/activestat")
 public class ActiveStatController extends AbstractController {
