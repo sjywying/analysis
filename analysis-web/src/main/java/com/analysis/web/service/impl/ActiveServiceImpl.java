@@ -32,7 +32,7 @@ public class ActiveServiceImpl implements ActiveService {
 	}
 	
 	@Override
-	public List<Active> findByChannelAndModel(String channel) {
+	public List<Active> findByChannel(String channel) {
 		if(StringUtils.isEmpty(channel)) {
 			logger.error("request params channel is null");
 		}

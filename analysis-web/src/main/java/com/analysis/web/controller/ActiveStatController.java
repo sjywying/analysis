@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.analysis.web.bean.Active;
+import com.analysis.web.bean.User;
 import com.analysis.web.service.ActiveService;
 import com.analysis.web.ui.Menu;
 
@@ -28,7 +29,6 @@ public class ActiveStatController extends AbstractController {
 
     @RequestMapping(value = "/index", method = RequestMethod.GET)
     public ModelAndView index() {
-    	System.out.println("index");
         return new ModelAndView("activestat/active", new HashMap<String, List<Menu>>());
     }
     
@@ -36,7 +36,8 @@ public class ActiveStatController extends AbstractController {
     public ModelAndView getAllByChannel() {
     	ModelAndView modelAndView = new ModelAndView();
     	Subject subject = SecurityUtils.getSubject();
-        List<Active> list = activeService.findByChannelAndModel("100322");
+    	User o = (User)subject.getPrincipal();
+        List<Active> list = activeService.findByChannel(o.getChannel());
     	modelAndView.addObject("actives", list);
         return modelAndView;
     }

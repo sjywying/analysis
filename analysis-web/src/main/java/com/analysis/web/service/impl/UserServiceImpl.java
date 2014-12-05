@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.analysis.web.bean.User;
-import com.analysis.web.bean.UserExample;
 import com.analysis.web.common.util.Md5Utils;
 import com.analysis.web.dao.UserMapper;
 import com.analysis.web.service.UserService;
@@ -25,9 +24,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User getUserByUsername(String username) {
 		User user = null;
-		UserExample userExample = new UserExample();
-		userExample.createCriteria().andUsernameEqualTo(username);
-		List<User> users = userMapper.selectByExample(userExample);
+		List<User> users = userMapper.selectByUsername(username);
 		if (users != null && users.size() == 1) {
 			user = users.get(0);
 		}
@@ -36,7 +33,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public List<User> getAllUsers() {
-		return userMapper.selectByExample(null);
+		return userMapper.selectAll();
 	}
 
 	@Override

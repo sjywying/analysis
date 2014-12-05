@@ -3,7 +3,7 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  */
-package egox.sm.interceptor;
+package com.analysis.web.interceptor;
 
 import org.springframework.util.AntPathMatcher;
 import org.springframework.util.PathMatcher;

@@ -1,6 +1,6 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="sm" tagdir="/WEB-INF/tags" %>
-<%@attribute name="menu" type="egox.sm.ui.Menu" required="true" description="菜单" %>
+<%@attribute name="menu" type="com.analysis.web.ui.Menu" required="true" description="菜单" %>
 
 <c:if test="${not empty menu.children}">
     <ul class="sub">

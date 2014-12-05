@@ -63,7 +63,9 @@ public class MonitorRealm extends AuthorizingRealm {
             //从数据库中查询用户用信息
             User user = userService.login(username, password);
             if (user != null) {
-                return new SimpleAuthenticationInfo(user.getUsername(), password.toCharArray(), getName());
+            	SimpleAuthenticationInfo simpleAuthenticationInfo = 
+            			new SimpleAuthenticationInfo(user, password.toCharArray(), getName());
+            	return simpleAuthenticationInfo;
             } else {
                 return null;
             }
@@ -73,8 +75,7 @@ public class MonitorRealm extends AuthorizingRealm {
     }
 
     public void clearCachedAuthorizationInfo(String principal) {
-        SimplePrincipalCollection principals = new SimplePrincipalCollection(
-                principal, getName());
+        SimplePrincipalCollection principals = new SimplePrincipalCollection(principal, getName());
         clearCachedAuthorizationInfo(principals);
     }
 

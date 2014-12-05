@@ -8,5 +8,5 @@ public interface ActiveService {
 	
 	public List<Active> findByChannelAndModel(String channel, String model);
 	
-	public List<Active> findByChannelAndModel(String channel);
+	public List<Active> findByChannel(String channel);
 }

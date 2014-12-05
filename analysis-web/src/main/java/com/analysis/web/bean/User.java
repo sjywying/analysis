@@ -14,6 +14,7 @@ public class User {
     private String status;
     private Boolean isDeleted;
     private Boolean isAdmin;
+    private String channel;
     
 	public Long getId() {
 		return id;
@@ -74,6 +75,12 @@ public class User {
 	}
 	public void setIsAdmin(Boolean isAdmin) {
 		this.isAdmin = isAdmin;
+	}
+	public String getChannel() {
+		return channel;
+	}
+	public void setChannel(String channel) {
+		this.channel = channel;
 	}
     
 }
