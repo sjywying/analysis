@@ -1,6 +1,6 @@
 package com.analysis.web.job;
 
-import java.util.Set;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,8 +28,7 @@ public class Redis2MysqlJob {
 	public void regPersistence() {
 //		redisTemplate.opsForSet().differenceAndStore(key, otherKeys, destKey)members(RedisConstants.REGISTE_SET_TID_MEMCACHE);
 //		TODO 批处理
-		
-		Set<String> tids = redisTemplate.opsForSet().members(RedisConstants.REGISTE_SET_TID_MEMCACHE);
+		List<String> tids = redisTemplate.opsForSet().randomMembers(RedisConstants.REGISTE_SET_TID_MEMCACHE, 10);
 		
 		if(tids == null || tids.size() == 0) {
 			logger.debug("tids is empty.");
@@ -50,7 +49,7 @@ public class Redis2MysqlJob {
 				logger.debug("redis data to mysql finish");
 			} catch (Exception e) {
 				logger.error("redis data to mysql error, error message {}", e.getMessage());
-				e.printStackTrace();
+//				e.printStackTrace();
 				continue;
 			}
 		}
