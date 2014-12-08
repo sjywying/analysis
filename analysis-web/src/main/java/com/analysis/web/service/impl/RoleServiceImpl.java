@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.analysis.web.bean.Role;
-import com.analysis.web.dao.RoleMapper;
+import com.analysis.web.mapper.RoleMapper;
 import com.analysis.web.service.RoleService;
 
 /**

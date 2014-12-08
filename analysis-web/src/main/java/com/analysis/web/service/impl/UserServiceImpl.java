@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.analysis.web.bean.User;
 import com.analysis.web.common.util.Md5Utils;
-import com.analysis.web.dao.UserMapper;
+import com.analysis.web.mapper.UserMapper;
 import com.analysis.web.service.UserService;
 
 @Service("userService")

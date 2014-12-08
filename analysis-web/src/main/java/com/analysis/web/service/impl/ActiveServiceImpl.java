@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.alibaba.druid.util.StringUtils;
 import com.analysis.web.bean.Active;
-import com.analysis.web.dao.ActiveMapper;
+import com.analysis.web.mapper.ActiveMapper;
 import com.analysis.web.service.ActiveService;
 
 @Service("activeService")

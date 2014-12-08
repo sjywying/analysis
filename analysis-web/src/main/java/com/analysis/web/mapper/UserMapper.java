@@ -1,4 +1,4 @@
-package com.analysis.web.dao;
+package com.analysis.web.mapper;
 
 import java.util.List;
 

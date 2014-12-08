@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.analysis.web.bean.Resource;
 import com.analysis.web.bean.ResourceExample;
-import com.analysis.web.dao.ResourceMapper;
+import com.analysis.web.mapper.ResourceMapper;
 import com.analysis.web.service.ResourceService;
 import com.analysis.web.ui.Menu;
 
