@@ -29,3 +29,6 @@ nginx --> kafka nginx topic---------kafka in_indexpage topic (1. 进入首页)
 	7. kafka数据丢失情况
 	8. 防止别人刷数据
 	9. 异常日志迅速报警
+	
+以解决问题：
+	1. redis 存储时出现key 前包含 \xac\xed\x00\x05t\x00\x10

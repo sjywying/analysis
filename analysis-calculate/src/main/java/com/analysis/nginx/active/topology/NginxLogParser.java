@@ -9,7 +9,7 @@ import com.analysis.calculate.common.metadata.Constants;
 public class NginxLogParser {
 	
 //	private static final SimpleDateFormat df = new SimpleDateFormat("dd/MMM/yyyy:HH:mm:ss", Locale.US);
-
+	
 	public static ActiveBean parser(String nginxlogStr) {
 		ActiveBean bean = new ActiveBean();
 		
@@ -48,5 +48,7 @@ public class NginxLogParser {
 		
 		return map;
 	}
+	
+
 	
 }

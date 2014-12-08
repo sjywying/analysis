@@ -10,7 +10,8 @@ public enum TopicType {
 	INDEX_PAGE("首页", "4", "index_page"),
 	BANNER("首页", "5", "banner"),
 	EXPRESS("首页", "6", "express"),
-	ACTIVE("首页", "7", "active");
+	ACTIVE("首页", "7", "active"),
+	REGISTE("首页", "8", "registe");
 
 	private String text;
 	private String code;
