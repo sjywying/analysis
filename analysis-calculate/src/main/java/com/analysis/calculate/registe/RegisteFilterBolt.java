@@ -42,7 +42,7 @@ public class RegisteFilterBolt implements IRichBolt {
 				bean = (Registe) tuple.getValueByField(RegisteParserBolt.FIELDS_CONTENT);
 				
 				if(Strings.compareTidMD5(tid, bean.getUa())) {
-					collector.emit(new Values(tid, bean));
+					collector.emit(new Values(tid, JSON.toJSONString(bean)));
 				} else {
 					collector.emit(new Values(RegisteParserBolt.FIELDS_TID_VALUE_ERROR_DEFAULT, JSON.toJSONString(bean)));
 				}
