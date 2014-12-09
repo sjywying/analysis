@@ -34,9 +34,9 @@ public class RegisteFilterBolt implements IRichBolt {
 	public void execute(Tuple tuple) {
 		try {
 			String tid = tuple.getStringByField(RegisteParserBolt.FIELDS_TID);
-			String content = tuple.getStringByField(RegisteParserBolt.FIELDS_CONTENT);
 			Registe bean = null;
 			if(RegisteParserBolt.FIELDS_TID_VALUE_ERROR_DEFAULT.equals(tid)) {
+				String content = tuple.getStringByField(RegisteParserBolt.FIELDS_CONTENT);
 				collector.emit(new Values(RegisteParserBolt.FIELDS_TID_VALUE_ERROR_DEFAULT, content));
 			} else {
 				bean = (Registe) tuple.getValueByField(RegisteParserBolt.FIELDS_CONTENT);
