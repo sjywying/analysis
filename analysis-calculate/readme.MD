@@ -32,3 +32,4 @@ nginx --> kafka nginx topic---------kafka in_indexpage topic (1. 进入首页)
 	
 以解决问题：
 	1. redis 存储时出现key 前包含 \xac\xed\x00\x05t\x00\x10
+	2. flume没有数据过一段时间就会有几分钟无法传输数据

@@ -7,7 +7,6 @@ import backtype.storm.tuple.Fields;
 import backtype.storm.tuple.Tuple;
 import backtype.storm.tuple.Values;
 
-import com.alibaba.fastjson.JSON;
 import com.analysis.api.bean.Registe;
 
 public class RegisteParserBolt extends BaseBasicBolt {
@@ -41,7 +40,7 @@ public class RegisteParserBolt extends BaseBasicBolt {
 				bean.setUa(logArr[12]);
 			}
 		
-			collector.emit(new Values(bean.getTid(), JSON.toJSONString(bean)));
+			collector.emit(new Values(bean.getTid(), bean));
 		} catch (Exception e) {
 			collector.emit(new Values(FIELDS_TID_VALUE_ERROR_DEFAULT, log));
 		}

@@ -21,6 +21,7 @@ public class RegisteTopology {
 		final String topologyName = "reg_topology";
 		final String spoutId = "reg_spout";
 		final String parserBolt = "reg_parser_bolt";
+		final String filterBolt = "reg_filter_bolt";
 		final String persistentBolt = "reg_persistent_bolt";
 		
 		final int STORM_WORKER_NUM = 4;
@@ -34,7 +35,8 @@ public class RegisteTopology {
 		TopologyBuilder builder = new TopologyBuilder();
 		builder.setSpout(spoutId, new KafkaSpout(spoutConfig));
 		builder.setBolt(parserBolt, new RegisteParserBolt()).shuffleGrouping(spoutId);
-		builder.setBolt(persistentBolt, new RegistePersistentBolt()).shuffleGrouping(parserBolt);
+		builder.setBolt(filterBolt, new RegisteFilterBolt()).shuffleGrouping(parserBolt);
+		builder.setBolt(persistentBolt, new RegistePersistentBolt()).shuffleGrouping(filterBolt);
 
 		Config conf = new Config();
 		if (args != null && args.length > 0) {
