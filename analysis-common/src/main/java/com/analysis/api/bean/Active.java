@@ -19,6 +19,7 @@ public class Active implements Serializable {
 	private String pkgname;
 	private String an;
 	private String cityid;
+	private String type;
 	
 	public boolean check() {
 		if(Strings.isEmpty(tid)) return false;
@@ -116,6 +117,14 @@ public class Active implements Serializable {
 
 	public void setPkgname(String pkgname) {
 		this.pkgname = pkgname;
+	}
+
+	public String getType() {
+		return type;
+	}
+	
+	public void setType(String type) {
+		this.type = type;
 	}
 	
 }
