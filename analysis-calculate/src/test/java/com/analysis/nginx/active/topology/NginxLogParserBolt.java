@@ -1,7 +1,4 @@
-package com.winksi.nginx.topology;
-
-import java.util.HashMap;
-import java.util.Map;
+package com.analysis.nginx.active.topology;
 
 import backtype.storm.topology.BasicOutputCollector;
 import backtype.storm.topology.OutputFieldsDeclarer;
@@ -11,8 +8,8 @@ import backtype.storm.tuple.Tuple;
 import backtype.storm.tuple.Values;
 
 import com.alibaba.fastjson.JSON;
-import com.winksi.calculate.common.metadata.Constants;
-import com.winksi.calculate.common.metadata.TopicType;
+import com.analysis.calculate.active.ActiveBean;
+import com.analysis.calculate.common.metadata.TopicType;
 
 public class NginxLogParserBolt extends BaseBasicBolt {
 	
@@ -24,12 +21,13 @@ public class NginxLogParserBolt extends BaseBasicBolt {
 	@Override
 	public void execute(Tuple input, BasicOutputCollector collector) {
 		String log = (String) input.getValue(0);
-		Map<String, String> content = new HashMap<String, String>(0);
 		try {
-			content = NginxLogParser.parser(log);
-			collector.emit(new Values(content.get(NginxConstants.NGINX_REQUEST_PARAMS_TYPE), JSON.toJSONString(content)));
+			ActiveBean bean = NginxLogParser.parser(log);
+			if(bean.check()) {
+				collector.emit(new Values(TopicType.ACTIVE.getTopic(), JSON.toJSONString(bean)));
+			}
 		} catch (Exception e) {
-			collector.emit(new Values(TopicType.OTHER.getCode(), log));
+			collector.emit(new Values(TopicType.OTHER.getTopic(), log));
 		}
 	}
 

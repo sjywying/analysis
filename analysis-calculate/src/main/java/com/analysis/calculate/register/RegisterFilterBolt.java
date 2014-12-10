@@ -1,4 +1,4 @@
-package com.analysis.calculate.registe;
+package com.analysis.calculate.register;
 
 import java.util.Map;
 
@@ -17,11 +17,11 @@ import com.alibaba.fastjson.JSON;
 import com.analysis.api.bean.Registe;
 import com.analysis.common.utils.Strings;
 
-public class RegisteFilterBolt implements IRichBolt {
+public class RegisterFilterBolt implements IRichBolt {
 	
 	private static final long serialVersionUID = 1L;
 	
-	private static final Logger logger = LoggerFactory.getLogger(RegisteFilterBolt.class);
+	private static final Logger logger = LoggerFactory.getLogger(RegisterFilterBolt.class);
 	
 	private transient OutputCollector collector;
 	
@@ -33,18 +33,18 @@ public class RegisteFilterBolt implements IRichBolt {
 	@Override
 	public void execute(Tuple tuple) {
 		try {
-			String tid = tuple.getStringByField(RegisteParserBolt.FIELDS_TID);
+			String tid = tuple.getStringByField(RegisterParserBolt.FIELDS_TID);
 			Registe bean = null;
-			if(RegisteParserBolt.FIELDS_TID_VALUE_ERROR_DEFAULT.equals(tid)) {
-				String content = tuple.getStringByField(RegisteParserBolt.FIELDS_CONTENT);
-				collector.emit(new Values(RegisteParserBolt.FIELDS_TID_VALUE_ERROR_DEFAULT, content));
+			if(RegisterParserBolt.FIELDS_TID_VALUE_ERROR_DEFAULT.equals(tid)) {
+				String content = tuple.getStringByField(RegisterParserBolt.FIELDS_CONTENT);
+				collector.emit(new Values(RegisterParserBolt.FIELDS_TID_VALUE_ERROR_DEFAULT, content));
 			} else {
-				bean = (Registe) tuple.getValueByField(RegisteParserBolt.FIELDS_CONTENT);
+				bean = (Registe) tuple.getValueByField(RegisterParserBolt.FIELDS_CONTENT);
 				
 				if(Strings.compareTidMD5(tid, bean.getUa())) {
 					collector.emit(new Values(tid, JSON.toJSONString(bean)));
 				} else {
-					collector.emit(new Values(RegisteParserBolt.FIELDS_TID_VALUE_ERROR_DEFAULT, JSON.toJSONString(bean)));
+					collector.emit(new Values(RegisterParserBolt.FIELDS_TID_VALUE_ERROR_DEFAULT, JSON.toJSONString(bean)));
 				}
 			}
 		} catch (Exception e) {
@@ -57,7 +57,7 @@ public class RegisteFilterBolt implements IRichBolt {
 
 	@Override
 	public void declareOutputFields(OutputFieldsDeclarer declarer) {
-		declarer.declare(new Fields(RegisteParserBolt.FIELDS_TID, RegisteParserBolt.FIELDS_CONTENT));
+		declarer.declare(new Fields(RegisterParserBolt.FIELDS_TID, RegisterParserBolt.FIELDS_CONTENT));
 	}
 
 	@Override

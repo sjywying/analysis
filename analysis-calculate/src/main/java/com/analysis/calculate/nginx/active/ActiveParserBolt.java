@@ -1,7 +1,4 @@
-package com.winksi.nginx.topology;
-
-import java.util.HashMap;
-import java.util.Map;
+package com.analysis.calculate.nginx.active;
 
 import backtype.storm.topology.BasicOutputCollector;
 import backtype.storm.topology.OutputFieldsDeclarer;
@@ -11,12 +8,13 @@ import backtype.storm.tuple.Tuple;
 import backtype.storm.tuple.Values;
 
 import com.alibaba.fastjson.JSON;
-import com.winksi.calculate.common.metadata.Constants;
-import com.winksi.calculate.common.metadata.TopicType;
+import com.analysis.api.bean.Active;
 
-public class NginxLogParserBolt extends BaseBasicBolt {
+
+public class ActiveParserBolt extends BaseBasicBolt {
 	
-	public static final String FIELDS_TYPE = "type";
+	public static final String FIELDS_TID = "tid";
+	public static final String FIELDS_TID_VALUE_ERROR_DEFAULT = "other";
 	public static final String FIELDS_CONTENT = "content";
 	
 	private static final long serialVersionUID = 1L;
@@ -24,19 +22,19 @@ public class NginxLogParserBolt extends BaseBasicBolt {
 	@Override
 	public void execute(Tuple input, BasicOutputCollector collector) {
 		String log = (String) input.getValue(0);
-		Map<String, String> content = new HashMap<String, String>(0);
+		
 		try {
-			content = NginxLogParser.parser(log);
-			collector.emit(new Values(content.get(NginxConstants.NGINX_REQUEST_PARAMS_TYPE), JSON.toJSONString(content)));
+			Active bean = JSON.parseObject(log, Active.class);
+		
+			collector.emit(new Values(bean.getTid(), JSON.toJSONString(bean)));
 		} catch (Exception e) {
-			collector.emit(new Values(TopicType.OTHER.getCode(), log));
+			collector.emit(new Values(FIELDS_TID_VALUE_ERROR_DEFAULT, log));
 		}
 	}
 
 	@Override
 	public void declareOutputFields(OutputFieldsDeclarer declarer) {
-		declarer.declare(new Fields(FIELDS_TYPE, FIELDS_CONTENT));
+		declarer.declare(new Fields(FIELDS_TID, FIELDS_CONTENT));
 	}
-	
 	
 }

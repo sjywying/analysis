@@ -1,4 +1,4 @@
-package com.analysis.calculate.registe;
+package com.analysis.calculate.register;
 
 import java.util.Map;
 
@@ -13,14 +13,14 @@ import backtype.storm.tuple.Tuple;
 
 import com.analysis.calculate.common.spring.SpringApplicationContextFactory;
 
-public class RegistePersistentBolt implements IRichBolt {
+public class RegisterPersistentBolt implements IRichBolt {
 	
 	private static final long serialVersionUID = 1L;
 	
-	private static final String REDIS_REGISTE_SET_TID_MEMCACHE = "reg_tid_memcache";
-	private static final String REDIS_REGISTE_SET_TID_PERSISTENT = "reg_tid_persistent";
+	public static final String REDIS_REGISTE_SET_TID_MEMCACHE = "reg_tid_memcache";
+	public static final String REDIS_REGISTE_SET_TID_PERSISTENT = "reg_tid_persistent";
 	
-	private static final String REDIS_REGISTE_HASH_CONTENT_ACTIVE = "reg_content_active";
+	private static final String REDIS_REGISTE_HASH_CONTENT_ACTIVE = "reg_content";
 	private static final String REDIS_REGISTE_HASH_CONTENT_ERROR = "reg_content_error";
 	
 	private transient OutputCollector collector;
@@ -37,8 +37,8 @@ public class RegistePersistentBolt implements IRichBolt {
 	
 	@Override
 	public void execute(Tuple tuple) {
-		String tid = tuple.getStringByField(RegisteParserBolt.FIELDS_TID);
-		String content = tuple.getStringByField(RegisteParserBolt.FIELDS_CONTENT);
+		String tid = tuple.getStringByField(RegisterParserBolt.FIELDS_TID);
+		String content = tuple.getStringByField(RegisterParserBolt.FIELDS_CONTENT);
 		
 		try {
 			boolean isExistMem = redisTemplate.opsForSet().isMember(REDIS_REGISTE_SET_TID_MEMCACHE, tid);

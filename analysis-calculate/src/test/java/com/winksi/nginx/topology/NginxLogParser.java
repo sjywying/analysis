@@ -13,12 +13,12 @@ public class NginxLogParser {
 		String[] arr = nginxlogStr.split(" ");
 		
 		Map<String, String> urlmap = parserUrl(arr[6]);
-		urlmap.put(Constants.NGINX_REQUEST_PARAMS_IP, arr[0]);
-		urlmap.put(Constants.NGINX_REQUEST_PARAMS_CTIME, arr[3].substring(1) + arr[4].substring(0, arr[4].length() - 1));
+		urlmap.put(NginxConstants.NGINX_REQUEST_PARAMS_IP, arr[0]);
+		urlmap.put(NginxConstants.NGINX_REQUEST_PARAMS_CTIME, arr[3].substring(1) + arr[4].substring(0, arr[4].length() - 1));
 		
-        String type = urlmap.get(Constants.NGINX_REQUEST_PARAMS_TYPE);
+        String type = urlmap.get(NginxConstants.NGINX_REQUEST_PARAMS_TYPE);
 		if(type == null || "".equals(type)) {
-			urlmap.put(Constants.NGINX_REQUEST_PARAMS_TYPE, "0");
+			urlmap.put(NginxConstants.NGINX_REQUEST_PARAMS_TYPE, "0");
 		}
 		
         return urlmap;

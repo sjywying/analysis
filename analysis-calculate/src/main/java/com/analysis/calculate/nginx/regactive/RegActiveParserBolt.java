@@ -1,4 +1,4 @@
-package com.analysis.calculate.registe;
+package com.analysis.calculate.nginx.regactive;
 
 import backtype.storm.topology.BasicOutputCollector;
 import backtype.storm.topology.OutputFieldsDeclarer;
@@ -7,9 +7,11 @@ import backtype.storm.tuple.Fields;
 import backtype.storm.tuple.Tuple;
 import backtype.storm.tuple.Values;
 
-import com.analysis.api.bean.Registe;
+import com.alibaba.fastjson.JSON;
+import com.analysis.api.bean.Active;
 
-public class RegisteParserBolt extends BaseBasicBolt {
+
+public class RegActiveParserBolt extends BaseBasicBolt {
 	
 	public static final String FIELDS_TID = "tid";
 	public static final String FIELDS_TID_VALUE_ERROR_DEFAULT = "other";
@@ -22,23 +24,7 @@ public class RegisteParserBolt extends BaseBasicBolt {
 		String log = (String) input.getValue(0);
 		
 		try {
-			String[] logArr = log.split(",");
-			Registe bean = new Registe();
-			bean.setCtime(logArr[0]);
-			bean.setIp(logArr[1]);
-			bean.setTid(logArr[2]);
-			bean.setImsi(logArr[3]);
-			bean.setImei(logArr[4]);
-			bean.setC(logArr[5]);
-			bean.setM(logArr[6]);
-			bean.setAv(logArr[7]);
-			bean.setPname(logArr[8]);
-			bean.setR(logArr[9]);
-			bean.setCcode(logArr[10]);
-			bean.setL(logArr[11]);
-//			if(logArr.length >= 13) {
-			bean.setUa(logArr[12]);
-//			}
+			Active bean = JSON.parseObject(log, Active.class);
 		
 			collector.emit(new Values(bean.getTid(), bean));
 		} catch (Exception e) {

@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.analysis.calculate.active.ActiveBean;
-import com.analysis.calculate.common.metadata.Constants;
+import com.analysis.calculate.common.metadata.NginxConstants;
 
 public class NginxLogParser {
 	
@@ -18,15 +18,15 @@ public class NginxLogParser {
 		
 		bean.setIp(arr[0]);
 		bean.setCtime(arr[3].substring(1));
-		bean.setAv(urlmap.get(Constants.NGINX_REQUEST_PARAMS_AV));
-		bean.setC(urlmap.get(Constants.NGINX_REQUEST_PARAMS_CHANNEL));
-		bean.setCcode(urlmap.get(Constants.NGINX_REQUEST_PARAMS_CITYCODE));
-		bean.setImsi(urlmap.get(Constants.NGINX_REQUEST_PARAMS_IMSI));
-		bean.setImei(urlmap.get(Constants.NGINX_REQUEST_PARAMS_IMEI));
-		bean.setM(urlmap.get(Constants.NGINX_REQUEST_PARAMS_MODEL));
-		bean.setPname(urlmap.get(Constants.NGINX_REQUEST_PARAMS_PACKAGENAME));
-		bean.setR(urlmap.get(Constants.NGINX_REQUEST_PARAMS_RESOLUTION));
-		bean.setTid(urlmap.get(Constants.NGINX_REQUEST_PARAMS_TID));
+		bean.setAv(urlmap.get(NginxConstants.NGINX_REQUEST_PARAMS_AV));
+		bean.setC(urlmap.get(NginxConstants.NGINX_REQUEST_PARAMS_CHANNEL));
+		bean.setCcode(urlmap.get(NginxConstants.NGINX_REQUEST_PARAMS_CITYCODE));
+		bean.setImsi(urlmap.get(NginxConstants.NGINX_REQUEST_PARAMS_IMSI));
+		bean.setImei(urlmap.get(NginxConstants.NGINX_REQUEST_PARAMS_IMEI));
+		bean.setM(urlmap.get(NginxConstants.NGINX_REQUEST_PARAMS_MODEL));
+		bean.setPname(urlmap.get(NginxConstants.NGINX_REQUEST_PARAMS_PACKAGENAME));
+		bean.setR(urlmap.get(NginxConstants.NGINX_REQUEST_PARAMS_RESOLUTION));
+		bean.setTid(urlmap.get(NginxConstants.NGINX_REQUEST_PARAMS_TID));
 		
         return bean;
 	}

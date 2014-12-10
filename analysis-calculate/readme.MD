@@ -5,6 +5,12 @@ nginx --> kafka nginx topic---------kafka in_indexpage topic (1. 进入首页)
 				|-------------------kafka click_shortcut topic (2. 点击快捷服务)
 				|
 				|-------------------.......
+				
+				
+kafka_spout--->parser_bolt--->filter_bolt-------------------------------->persistent_bolt	
+									|
+									|
+									|--------->handler_bolt-------------->persistent_bolt
 
 如果想添加统计分类信息需要修改：
 		1. Constants.Type 枚举类型
@@ -30,6 +36,11 @@ nginx --> kafka nginx topic---------kafka in_indexpage topic (1. 进入首页)
 	8. 防止别人刷数据
 	9. 异常日志迅速报警
 	
+	
+	1. 看treemap 源码
+	2. 
+	
 以解决问题：
 	1. redis 存储时出现key 前包含 \xac\xed\x00\x05t\x00\x10
 	2. flume没有数据过一段时间就会有几分钟无法传输数据
+	3. 无法并列执行bolt，每次都是随机的分给一个bolt，另外一个分支得不到。
