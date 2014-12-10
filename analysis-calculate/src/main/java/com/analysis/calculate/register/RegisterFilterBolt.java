@@ -32,23 +32,26 @@ public class RegisterFilterBolt implements IRichBolt {
 	
 	@Override
 	public void execute(Tuple tuple) {
+		String content = "";
 		try {
 			String tid = tuple.getStringByField(RegisterParserBolt.FIELDS_TID);
 			Registe bean = null;
 			if(RegisterParserBolt.FIELDS_TID_VALUE_ERROR_DEFAULT.equals(tid)) {
-				String content = tuple.getStringByField(RegisterParserBolt.FIELDS_CONTENT);
+				content = tuple.getStringByField(RegisterParserBolt.FIELDS_CONTENT);
 				collector.emit(new Values(RegisterParserBolt.FIELDS_TID_VALUE_ERROR_DEFAULT, content));
 			} else {
 				bean = (Registe) tuple.getValueByField(RegisterParserBolt.FIELDS_CONTENT);
+				content = JSON.toJSONString(bean);
 				
 				if(Strings.compareTidMD5(tid, bean.getUa())) {
-					collector.emit(new Values(tid, JSON.toJSONString(bean)));
+					collector.emit(new Values(tid, content));
 				} else {
-					collector.emit(new Values(RegisterParserBolt.FIELDS_TID_VALUE_ERROR_DEFAULT, JSON.toJSONString(bean)));
+					collector.emit(new Values(RegisterParserBolt.FIELDS_TID_VALUE_ERROR_DEFAULT, content));
 				}
 			}
 		} catch (Exception e) {
-			logger.error(e.getMessage());
+			collector.emit(new Values(RegisterParserBolt.FIELDS_TID_VALUE_ERROR_DEFAULT, content + "#"+this.getClass().getName()+"#" + e.getMessage()));
+//			logger.error("exception message: {}, content: {} ", e.getMessage(), content);
 		} finally {
 			collector.ack(tuple);
 		}

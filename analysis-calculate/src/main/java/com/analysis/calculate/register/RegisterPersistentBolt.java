@@ -52,9 +52,9 @@ public class RegisterPersistentBolt implements IRichBolt {
 				redisTemplate.opsForHash().putIfAbsent(REDIS_REGISTE_HASH_CONTENT_ACTIVE, tid, content);
 			}
 			
-			collector.ack(tuple);
 		} catch (Exception e) {
-			redisTemplate.opsForHash().put(REDIS_REGISTE_HASH_CONTENT_ERROR, tid, content);
+			redisTemplate.opsForHash().put(REDIS_REGISTE_HASH_CONTENT_ERROR, tid, content+"#"+this.getClass().getName()+"#"+e.getMessage());
+		} finally {
 			collector.ack(tuple);
 		}
 		

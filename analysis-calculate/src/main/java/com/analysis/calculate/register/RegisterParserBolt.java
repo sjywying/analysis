@@ -42,7 +42,7 @@ public class RegisterParserBolt extends BaseBasicBolt {
 		
 			collector.emit(new Values(bean.getTid(), bean));
 		} catch (Exception e) {
-			collector.emit(new Values(FIELDS_TID_VALUE_ERROR_DEFAULT, log));
+			collector.emit(new Values(FIELDS_TID_VALUE_ERROR_DEFAULT, log+"#"+this.getClass().getName()+"#"+e.getMessage()));
 		}
 	}
 
