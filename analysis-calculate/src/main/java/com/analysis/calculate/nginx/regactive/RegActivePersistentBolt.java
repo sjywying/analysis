@@ -15,15 +15,16 @@ import com.alibaba.fastjson.JSON;
 import com.analysis.api.bean.Active;
 import com.analysis.calculate.common.spring.SpringApplicationContextFactory;
 import com.analysis.calculate.register.RegisterPersistentBolt;
+import com.analysis.common.constants.RedisConstants;
 
 public class RegActivePersistentBolt implements IRichBolt {
 	
 	private static final long serialVersionUID = 1L;
 	
-	private static final String REDIS_REGACTIVE_SET_TID_MEMCACHE = "regactive_tid_memcache";
-	private static final String REDIS_REGACTIVE_SET_TID_PERSISTENT = "regactive_tid_persistent";
-	private static final String REDIS_REGACTIVE_HASH_CONTENT = "regactive_content";
-	private static final String REDIS_REGACTIVE_HASH_CONTENT_ERROR = "regactive_content_error";
+//	private static final String REDIS_REGACTIVE_SET_TID_MEMCACHE = "regactive_tid_memcache";
+//	private static final String REDIS_REGACTIVE_SET_TID_PERSISTENT = "regactive_tid_persistent";
+//	private static final String REDIS_REGACTIVE_HASH_CONTENT = "regactive_content";
+//	private static final String REDIS_REGACTIVE_HASH_CONTENT_ERROR = "regactive_content_error";
 	
 	private transient OutputCollector collector;
 	
@@ -57,9 +58,9 @@ public class RegActivePersistentBolt implements IRichBolt {
 			if(isreg) {
 				//	已经注册
 				
-				boolean isExistMem = redisTemplate.opsForSet().isMember(REDIS_REGACTIVE_SET_TID_MEMCACHE, tid);
+				boolean isExistMem = redisTemplate.opsForSet().isMember(RedisConstants.REDIS_REGACTIVE_SET_TID_MEMCACHE, tid);
 				if(!isExistMem) {
-					isExistMem = redisTemplate.opsForSet().isMember(REDIS_REGACTIVE_SET_TID_PERSISTENT, tid);
+					isExistMem = redisTemplate.opsForSet().isMember(RedisConstants.REDIS_REGACTIVE_SET_TID_PERSISTENT, tid);
 				}
 				
 				//	已经激活
@@ -80,8 +81,8 @@ public class RegActivePersistentBolt implements IRichBolt {
 					}
 					
 					if(listlen == 3) {
-						redisTemplate.opsForSet().add(REDIS_REGACTIVE_SET_TID_MEMCACHE, tid);
-						redisTemplate.opsForHash().putIfAbsent(REDIS_REGACTIVE_HASH_CONTENT, tid, JSON.toJSONString(bean));
+						redisTemplate.opsForSet().add(RedisConstants.REDIS_REGACTIVE_SET_TID_MEMCACHE, tid);
+						redisTemplate.opsForHash().putIfAbsent(RedisConstants.REDIS_REGACTIVE_HASH_CONTENT, tid, JSON.toJSONString(bean));
 					}
 				} else {
 					
@@ -91,7 +92,7 @@ public class RegActivePersistentBolt implements IRichBolt {
 			}
 			
 		} catch (Exception e) {
-			redisTemplate.opsForHash().put(REDIS_REGACTIVE_HASH_CONTENT_ERROR, tid, JSON.toJSONString(bean));
+			redisTemplate.opsForHash().put(RedisConstants.REDIS_REGACTIVE_HASH_CONTENT_ERROR, tid, JSON.toJSONString(bean));
 		} finally {
 			collector.ack(tuple);
 		}
