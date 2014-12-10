@@ -90,10 +90,10 @@ public class RegActivePersistentBolt implements IRichBolt {
 				// 未注册不做任何操作
 			}
 			
-			collector.ack(tuple);
 		} catch (Exception e) {
 			redisTemplate.opsForHash().put(REDIS_REGACTIVE_HASH_CONTENT_ERROR, tid, JSON.toJSONString(bean));
-			collector.fail(tuple);
+		} finally {
+			collector.ack(tuple);
 		}
 		
 	}
