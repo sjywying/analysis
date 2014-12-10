@@ -70,9 +70,9 @@ public class RegActivePersistentBolt implements IRichBolt {
 					long listlen = redisTemplate.opsForList().size(LIST_KEY_PREFIX+tid);
 					if(listlen < 3) {
 						// TODO 缺乏对reg时间的对比， 暂时忽略（原因是实时）
-						String pdate = redisTemplate.opsForList().index(LIST_KEY_PREFIX+tid, listlen);
+						String pdate = redisTemplate.opsForList().index(LIST_KEY_PREFIX+tid, listlen-1);
 						String date = bean.getCtime().substring(0, 8);
-						if(!pdate.equals(date)) {
+						if(!date.equals(pdate)) {
 							redisTemplate.opsForList().rightPush(LIST_KEY_PREFIX+tid, date);
 							listlen ++;
 						} else {
@@ -85,7 +85,7 @@ public class RegActivePersistentBolt implements IRichBolt {
 					if(listlen == 3) {
 						redisTemplate.opsForSet().add(RedisConstants.REGACTIVE_SET_TID_MEMCACHE, tid);
 						redisTemplate.opsForHash().putIfAbsent(RedisConstants.REGACTIVE_HASH_CONTENT, tid, JSON.toJSONString(bean));
-						redisTemplate.delete(tid);
+						redisTemplate.delete(LIST_KEY_PREFIX+tid);
 					}
 				} else {
 					
@@ -95,7 +95,7 @@ public class RegActivePersistentBolt implements IRichBolt {
 			}
 			
 		} catch (Exception e) {
-			redisTemplate.opsForHash().put(RedisConstants.REGACTIVE_HASH_CONTENT_ERROR, tid, JSON.toJSONString(bean));
+			redisTemplate.opsForHash().put(RedisConstants.REGACTIVE_HASH_CONTENT_ERROR, tid, JSON.toJSONString(bean)+"#"+this.getClass().getName()+"#"+e.getMessage());
 		} finally {
 			collector.ack(tuple);
 		}
