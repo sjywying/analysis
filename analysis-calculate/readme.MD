@@ -38,7 +38,7 @@ kafka_spout--->parser_bolt--->filter_bolt-------------------------------->persis
 	
 	
 	1. 看treemap 源码
-	2. 
+	2. 看String.split(",") 源码
 	
 以解决问题：
 	1. redis 存储时出现key 前包含 \xac\xed\x00\x05t\x00\x10
