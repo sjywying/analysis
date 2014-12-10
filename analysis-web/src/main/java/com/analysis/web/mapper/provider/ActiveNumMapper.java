@@ -8,7 +8,7 @@ import com.analysis.api.bean.Registe;
 
 
 
-public class ActiveMapper {
+public class ActiveNumMapper {
 	
 	private static final String TABLE_NAME_PREFIX = "biz_active_";
     

@@ -26,6 +26,8 @@ public class RegActivePersistentBolt implements IRichBolt {
 //	private static final String REDIS_REGACTIVE_HASH_CONTENT = "regactive_content";
 //	private static final String REDIS_REGACTIVE_HASH_CONTENT_ERROR = "regactive_content_error";
 	
+	private static final String LIST_KEY_PREFIX = "regactive_list_";
+	
 	private transient OutputCollector collector;
 	
 	private static ApplicationContext applicationContext = SpringApplicationContextFactory.instance();
@@ -58,20 +60,20 @@ public class RegActivePersistentBolt implements IRichBolt {
 			if(isreg) {
 				//	已经注册
 				
-				boolean isExistMem = redisTemplate.opsForSet().isMember(RedisConstants.REDIS_REGACTIVE_SET_TID_MEMCACHE, tid);
+				boolean isExistMem = redisTemplate.opsForSet().isMember(RedisConstants.REGACTIVE_SET_TID_MEMCACHE, tid);
 				if(!isExistMem) {
-					isExistMem = redisTemplate.opsForSet().isMember(RedisConstants.REDIS_REGACTIVE_SET_TID_PERSISTENT, tid);
+					isExistMem = redisTemplate.opsForSet().isMember(RedisConstants.REGACTIVE_SET_TID_PERSISTENT, tid);
 				}
 				
 				//	已经激活
 				if(!isExistMem) {
-					long listlen = redisTemplate.opsForList().size(tid);
+					long listlen = redisTemplate.opsForList().size(LIST_KEY_PREFIX+tid);
 					if(listlen < 3) {
 						// TODO 缺乏对reg时间的对比， 暂时忽略（原因是实时）
-						String pdate = redisTemplate.opsForList().index(tid, listlen);
+						String pdate = redisTemplate.opsForList().index(LIST_KEY_PREFIX+tid, listlen);
 						String date = bean.getCtime().substring(0, 8);
 						if(!pdate.equals(date)) {
-							redisTemplate.opsForList().rightPush(tid, date);
+							redisTemplate.opsForList().rightPush(LIST_KEY_PREFIX+tid, date);
 							listlen ++;
 						} else {
 							
@@ -81,8 +83,9 @@ public class RegActivePersistentBolt implements IRichBolt {
 					}
 					
 					if(listlen == 3) {
-						redisTemplate.opsForSet().add(RedisConstants.REDIS_REGACTIVE_SET_TID_MEMCACHE, tid);
-						redisTemplate.opsForHash().putIfAbsent(RedisConstants.REDIS_REGACTIVE_HASH_CONTENT, tid, JSON.toJSONString(bean));
+						redisTemplate.opsForSet().add(RedisConstants.REGACTIVE_SET_TID_MEMCACHE, tid);
+						redisTemplate.opsForHash().putIfAbsent(RedisConstants.REGACTIVE_HASH_CONTENT, tid, JSON.toJSONString(bean));
+						redisTemplate.delete(tid);
 					}
 				} else {
 					
@@ -92,7 +95,7 @@ public class RegActivePersistentBolt implements IRichBolt {
 			}
 			
 		} catch (Exception e) {
-			redisTemplate.opsForHash().put(RedisConstants.REDIS_REGACTIVE_HASH_CONTENT_ERROR, tid, JSON.toJSONString(bean));
+			redisTemplate.opsForHash().put(RedisConstants.REGACTIVE_HASH_CONTENT_ERROR, tid, JSON.toJSONString(bean));
 		} finally {
 			collector.ack(tuple);
 		}

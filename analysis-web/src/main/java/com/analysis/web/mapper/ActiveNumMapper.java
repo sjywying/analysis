@@ -4,12 +4,12 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
-import com.analysis.web.bean.Active;
+import com.analysis.web.bean.ActiveNum;
 
 
-public interface ActiveMapper {
+public interface ActiveNumMapper {
     
-	List<Active> selectByChannelAndModel(
+	List<ActiveNum> selectByChannelAndModel(
 			@Param("channel") String channel,
 			@Param("model")String model);
 }

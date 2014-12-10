@@ -1,6 +1,6 @@
 package com.analysis.web.bean;
 
-public class Active {
+public class ActiveNum {
 	
 	private String yyyymm;
 	private String channel;

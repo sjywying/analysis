@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.analysis.web.bean.Active;
+import com.analysis.web.bean.ActiveNum;
 import com.analysis.web.bean.User;
 import com.analysis.web.service.ActiveService;
 import com.analysis.web.ui.Menu;
@@ -41,7 +41,7 @@ public class ActiveStatController extends AbstractController {
     	ModelAndView modelAndView = new ModelAndView();
     	Subject subject = SecurityUtils.getSubject();
     	User o = (User)subject.getPrincipal();
-        List<Active> list = activeService.findByChannel(o.getChannel());
+        List<ActiveNum> list = activeService.findByChannel(o.getChannel());
     	modelAndView.addObject("actives", list);
         return modelAndView;
     }

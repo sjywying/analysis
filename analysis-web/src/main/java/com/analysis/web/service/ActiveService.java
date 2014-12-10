@@ -2,11 +2,11 @@ package com.analysis.web.service;
 
 import java.util.List;
 
-import com.analysis.web.bean.Active;
+import com.analysis.web.bean.ActiveNum;
 
 public interface ActiveService {
 	
-	public List<Active> findByChannelAndModel(String channel, String model);
+	public List<ActiveNum> findByChannelAndModel(String channel, String model);
 	
-	public List<Active> findByChannel(String channel);
+	public List<ActiveNum> findByChannel(String channel);
 }
