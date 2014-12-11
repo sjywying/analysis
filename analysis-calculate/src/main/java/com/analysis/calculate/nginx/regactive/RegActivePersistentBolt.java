@@ -14,7 +14,6 @@ import backtype.storm.tuple.Tuple;
 import com.alibaba.fastjson.JSON;
 import com.analysis.api.bean.RegActive;
 import com.analysis.calculate.common.spring.SpringApplicationContextFactory;
-import com.analysis.calculate.register.RegisterPersistentBolt;
 import com.analysis.common.constants.RedisConstants;
 
 public class RegActivePersistentBolt implements IRichBolt {
@@ -46,6 +45,8 @@ public class RegActivePersistentBolt implements IRichBolt {
 		RegActive bean = null;
 		try {
 			if(RegActiveParserBolt.FIELDS_TID_VALUE_ERROR_DEFAULT.equals(tid)) {
+				String content = tuple.getStringByField(RegActiveParserBolt.FIELDS_CONTENT);
+				redisTemplate.opsForHash().put(RedisConstants.REGACTIVE_HASH_CONTENT_ERROR, tid, content);
 				return ;
 			}
 			

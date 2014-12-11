@@ -47,7 +47,7 @@ public class RegisterFilterBolt implements IRichBolt {
 				if(Constants.NO_MD5_CHECK || Strings.compareTidMD5(tid, bean.getUa())) {
 					collector.emit(new Values(tid, content));
 				} else {
-					collector.emit(new Values(RegisterParserBolt.FIELDS_TID_VALUE_ERROR_DEFAULT, content));
+					collector.emit(new Values(RegisterParserBolt.FIELDS_TID_VALUE_ERROR_DEFAULT, content+"#MD5checkfalse#"));
 				}
 			}
 		} catch (Exception e) {
