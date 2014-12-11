@@ -24,7 +24,7 @@ public class RegisterProvider {
 			.VALUES("ccode", Constants.SQL_SINGLE_QUOTES + register.getCcode() + Constants.SQL_SINGLE_QUOTES);
 		
 		if(register.getAv() != null) sql.VALUES("av", Constants.SQL_SINGLE_QUOTES + register.getAv() + Constants.SQL_SINGLE_QUOTES);
-		if(register.getR() != null) sql.VALUES("an", Constants.SQL_SINGLE_QUOTES + register.getR() + Constants.SQL_SINGLE_QUOTES);
+		if(register.getAn() != null) sql.VALUES("an", Constants.SQL_SINGLE_QUOTES + register.getAn() + Constants.SQL_SINGLE_QUOTES);
 		if(register.getIp() != null) sql.VALUES("ip", Constants.SQL_SINGLE_QUOTES + register.getIp() + Constants.SQL_SINGLE_QUOTES);
 		if(register.getType() != null) sql.VALUES("type", Constants.SQL_SINGLE_QUOTES + register.getType() + Constants.SQL_SINGLE_QUOTES);
 		if(register.getPname() != null) sql.VALUES("pname", Constants.SQL_SINGLE_QUOTES + register.getPname() + Constants.SQL_SINGLE_QUOTES);

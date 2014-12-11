@@ -25,7 +25,7 @@ public class ActiveNumMapper {
 			.VALUES("channel", registe.getC())
 			.VALUES("model", registe.getM())
 			.VALUES("av", registe.getAv())
-			.VALUES("an", registe.getR())
+			.VALUES("an", registe.getAn())
 			.VALUES("ip", registe.getIp())
 			.VALUES("type", registe.getType().toString());
 		
