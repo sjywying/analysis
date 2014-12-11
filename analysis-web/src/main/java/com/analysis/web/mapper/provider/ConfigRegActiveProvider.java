@@ -7,7 +7,7 @@ import com.analysis.common.constants.Constants;
 
 public class ConfigRegActiveProvider {
 	
-	private static final String TABLE_NAME_PREFIX = "biz_register_";
+	private static final String TABLE_NAME_PREFIX = "biz_configregactive_";
     
 	public String insert(ConfigRegActive bean) {
 		//TODO 源头格式化
