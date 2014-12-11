@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import com.analysis.common.utils.Strings;
 
-public class RegActive implements Serializable {
+public class RegActive implements CheckInterface, Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -21,6 +21,7 @@ public class RegActive implements Serializable {
 	private String cityid;
 	private String type;
 	
+	@Override
 	public boolean check() {
 		if(Strings.isEmpty(tid)) return false;
 		if(Strings.isEmpty(imsi)) return false;
