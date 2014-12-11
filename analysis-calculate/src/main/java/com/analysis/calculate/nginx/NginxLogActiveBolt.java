@@ -11,7 +11,7 @@ import backtype.storm.tuple.Tuple;
 import backtype.storm.tuple.Values;
 
 import com.alibaba.fastjson.JSON;
-import com.analysis.api.bean.Active;
+import com.analysis.api.bean.RegActive;
 import com.analysis.calculate.common.metadata.NginxTopicType;
 
 public class NginxLogActiveBolt extends BaseBasicBolt {
@@ -30,7 +30,7 @@ public class NginxLogActiveBolt extends BaseBasicBolt {
 //			Map<String, String> content = (Map<String, String>) tuple.getValueByField(NginxFilterBolt.FIELDS_CONTENT);
 			
 //			过滤无用数据项
-			Active bean = JSON.parseObject(content, Active.class);
+			RegActive bean = JSON.parseObject(content, RegActive.class);
 			
 //			bean.setIp(content.get(NginxConstants.NGINX_REQUEST_PARAMS_IP));
 //			bean.setCtime(content.get(NginxConstants.NGINX_REQUEST_PARAMS_CTIME));

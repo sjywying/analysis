@@ -8,7 +8,7 @@
     <result column="num" jdbcType="INTEGER" property="num" />
   </resultMap>
   
-  <select id="selectByChannelAndModel" resultMap="ActiveMap">
+  <select id="selectByChannelAndModel" resultMap="ActiveNumMap">
   	select yyyymm, channel, model, num from biz_active where channel=#{channel} 
   		<if test="model != null">
   			and model=#{model} 

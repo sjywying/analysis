@@ -12,7 +12,7 @@ import backtype.storm.topology.OutputFieldsDeclarer;
 import backtype.storm.tuple.Tuple;
 
 import com.alibaba.fastjson.JSON;
-import com.analysis.api.bean.Active;
+import com.analysis.api.bean.RegActive;
 import com.analysis.calculate.common.spring.SpringApplicationContextFactory;
 import com.analysis.calculate.register.RegisterPersistentBolt;
 import com.analysis.common.constants.RedisConstants;
@@ -43,13 +43,13 @@ public class RegActivePersistentBolt implements IRichBolt {
 	@Override
 	public void execute(Tuple tuple) {
 		String tid = tuple.getStringByField(RegActiveParserBolt.FIELDS_TID);
-		Active bean = null;
+		RegActive bean = null;
 		try {
 			if(RegActiveParserBolt.FIELDS_TID_VALUE_ERROR_DEFAULT.equals(tid)) {
 				return ;
 			}
 			
-			bean = (Active) tuple.getValueByField(RegActiveParserBolt.FIELDS_CONTENT);
+			bean = (RegActive) tuple.getValueByField(RegActiveParserBolt.FIELDS_CONTENT);
 			
 			
 			boolean isreg = redisTemplate.opsForSet().isMember(RegisterPersistentBolt.REDIS_REGISTE_SET_TID_MEMCACHE, tid);

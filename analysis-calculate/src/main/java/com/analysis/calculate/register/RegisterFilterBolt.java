@@ -14,7 +14,7 @@ import backtype.storm.tuple.Tuple;
 import backtype.storm.tuple.Values;
 
 import com.alibaba.fastjson.JSON;
-import com.analysis.api.bean.Registe;
+import com.analysis.api.bean.Register;
 import com.analysis.common.utils.Strings;
 
 public class RegisterFilterBolt implements IRichBolt {
@@ -35,12 +35,12 @@ public class RegisterFilterBolt implements IRichBolt {
 		String content = "";
 		try {
 			String tid = tuple.getStringByField(RegisterParserBolt.FIELDS_TID);
-			Registe bean = null;
+			Register bean = null;
 			if(RegisterParserBolt.FIELDS_TID_VALUE_ERROR_DEFAULT.equals(tid)) {
 				content = tuple.getStringByField(RegisterParserBolt.FIELDS_CONTENT);
 				collector.emit(new Values(RegisterParserBolt.FIELDS_TID_VALUE_ERROR_DEFAULT, content));
 			} else {
-				bean = (Registe) tuple.getValueByField(RegisterParserBolt.FIELDS_CONTENT);
+				bean = (Register) tuple.getValueByField(RegisterParserBolt.FIELDS_CONTENT);
 				content = JSON.toJSONString(bean);
 				
 				if(Strings.compareTidMD5(tid, bean.getUa())) {

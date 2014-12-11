@@ -4,7 +4,7 @@ import java.util.Map;
 
 import org.apache.ibatis.jdbc.SQL;
 
-import com.analysis.api.bean.Registe;
+import com.analysis.api.bean.Register;
 
 
 
@@ -13,7 +13,7 @@ public class ActiveNumMapper {
 	private static final String TABLE_NAME_PREFIX = "biz_active_";
     
 	public SQL insert(Map<String, Object> parameters) {
-		Registe registe = (Registe) parameters.get("registe");
+		Register registe = (Register) parameters.get("registe");
 		String ctime = registe.getCtime().substring(0, 7);
 		
 		SQL sql = new SQL();

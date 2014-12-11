@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.analysis.web.mapper.ActiveMapper">
-	<resultMap id="RegisteMap" type="com.analysis.api.bean.Registe">
+<mapper namespace="com.analysis.web.mapper.RegisterMapper">
+	<resultMap id="RegisteMap" type="com.analysis.api.bean.Register">
 		<result column="tid" jdbcType="VARCHAR" property="tid" />
 		<result column="ctime" jdbcType="VARCHAR" property="ctime" />
 		<result column="imsi" jdbcType="VARCHAR" property="imsi" />
