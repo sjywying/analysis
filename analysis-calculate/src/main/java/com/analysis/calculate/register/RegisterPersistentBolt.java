@@ -45,6 +45,8 @@ public class RegisterPersistentBolt implements IRichBolt {
 //				TODO transaction
 				redisTemplate.opsForSet().add(RedisConstants.REGISTE_SET_TID_MEMCACHE, tid);
 				redisTemplate.opsForHash().putIfAbsent(RedisConstants.REGISTE_HASH_CONTENT_ACTIVE, tid, content);
+			} else {
+				redisTemplate.opsForHash().put(RedisConstants.REGISTE_HASH_CONTENT_ERROR, tid, content+"#isexisttrue#");
 			}
 			
 		} catch (Exception e) {
