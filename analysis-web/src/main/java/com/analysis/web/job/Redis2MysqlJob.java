@@ -66,7 +66,7 @@ public class Redis2MysqlJob {
 	@Scheduled(fixedDelay = 1000*10)
 	public void configRegActivePersistence() {
 //		TODO 批处理强数据一致性未实现
-		Set<String> tids = redisTemplate.opsForSet().members(RedisConstants.CONFIGACTIVE_SET_TID_MEMCACHE);
+		Set<String> tids = redisTemplate.opsForSet().members(RedisConstants.CONFIGREGACTIVE_SET_TID_MEMCACHE);
 		
 		if(tids == null || tids.size() == 0) {
 			logger.debug("tids is empty.");
@@ -74,7 +74,7 @@ public class Redis2MysqlJob {
 		}
 		
 		for (String tid : tids) {
-			String content = (String) redisTemplate.opsForHash().get(RedisConstants.CONFIGACTIVE_HASH_CONTENT, tid);
+			String content = (String) redisTemplate.opsForHash().get(RedisConstants.CONFIGREGACTIVE_HASH_CONTENT, tid);
 			if(Strings.isEmpty(content)) {
 				logger.warn("tid : {}, content is empty.", tid);
 				continue;
@@ -84,7 +84,7 @@ public class Redis2MysqlJob {
 				Register registe = JSON.parseObject(content, Register.class);
 				registe.setType(IPMetadataParser.getCountry(registe.getIp()));
 				registeMapper.insert(registe);
-				redisTemplate.opsForSet().move(RedisConstants.CONFIGACTIVE_SET_TID_MEMCACHE, tid, RedisConstants.CONFIGACTIVE_SET_TID_PERSISTENT);
+				redisTemplate.opsForSet().move(RedisConstants.CONFIGREGACTIVE_SET_TID_MEMCACHE, tid, RedisConstants.CONFIGREGACTIVE_SET_TID_PERSISTENT);
 				logger.debug("redis data to mysql finish");
 			} catch (Exception e) {
 				logger.error("redis data to mysql error, error message {}", e.getMessage());
