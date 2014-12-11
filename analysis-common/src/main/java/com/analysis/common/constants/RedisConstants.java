@@ -7,7 +7,7 @@ public interface RedisConstants {
 	/*******************在redis,mysql中存储注册的tid集合*********************/
 	public static final String REGISTE_SET_TID_PERSISTENT = "reg_tid_persistent";
 	/*******************以此值为key，tid为filed进行hash存储*********************/
-	public static final String REGISTE_HASH_CONTENT_ACTIVE = "reg_content_active";
+	public static final String REGISTE_HASH_CONTENT_ACTIVE = "reg_content";
 	/**************以此值为key，tid为filed进行hash存储异常数据*********************/
 	public static final String REGISTE_HASH_CONTENT_ERROR = "reg_content_error";
 	

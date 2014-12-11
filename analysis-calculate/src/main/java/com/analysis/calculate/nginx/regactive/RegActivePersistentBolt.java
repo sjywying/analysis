@@ -52,9 +52,9 @@ public class RegActivePersistentBolt implements IRichBolt {
 			bean = (RegActive) tuple.getValueByField(RegActiveParserBolt.FIELDS_CONTENT);
 			
 			
-			boolean isreg = redisTemplate.opsForSet().isMember(RegisterPersistentBolt.REDIS_REGISTE_SET_TID_MEMCACHE, tid);
+			boolean isreg = redisTemplate.opsForSet().isMember(RedisConstants.REGISTE_SET_TID_MEMCACHE, tid);
 			if(!isreg) {
-				isreg = redisTemplate.opsForSet().isMember(RegisterPersistentBolt.REDIS_REGISTE_SET_TID_PERSISTENT, tid);
+				isreg = redisTemplate.opsForSet().isMember(RedisConstants.REGISTE_SET_TID_PERSISTENT, tid);
 			}
 			
 			if(isreg) {
