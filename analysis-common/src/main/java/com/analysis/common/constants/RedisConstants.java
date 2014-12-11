@@ -8,10 +8,10 @@ public interface RedisConstants {
 	public static final String REGISTE_HASH_CONTENT_ERROR = "reg_content_error";
 	
 	
-	public static final String CONFIGACTIVE_SET_TID_MEMCACHE = "configactive_tid_memcache";
-	public static final String CONFIGACTIVE_SET_TID_PERSISTENT = "configactive_tid_persistent";
-	public static final String CONFIGACTIVE_HASH_CONTENT = "configactive_content";
-	public static final String CONFIGACTIVE_HASH_CONTENT_ERROR = "configactive_content_error";
+	public static final String CONFIGREGACTIVE_SET_TID_MEMCACHE = "configregactive_tid_memcache";
+	public static final String CONFIGREGACTIVE_SET_TID_PERSISTENT = "configregactive_tid_persistent";
+	public static final String CONFIGREGACTIVE_HASH_CONTENT = "configregactive_content";
+	public static final String CONFIGREGACTIVE_HASH_CONTENT_ERROR = "configregactive_content_error";
 	
 	
 	public static final String REGACTIVE_SET_TID_MEMCACHE = "regactive_tid_memcache";

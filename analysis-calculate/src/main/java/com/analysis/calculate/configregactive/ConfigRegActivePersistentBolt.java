@@ -40,23 +40,23 @@ public class ConfigRegActivePersistentBolt implements IRichBolt {
 		
 		try {
 			if(ConfigRegActiveParserBolt.FIELDS_TID_VALUE_ERROR_DEFAULT.equals(tid)) {
-				redisTemplate.opsForHash().put(RedisConstants.REGACTIVE_HASH_CONTENT_ERROR, tid, content);
+				redisTemplate.opsForHash().put(RedisConstants.CONFIGREGACTIVE_HASH_CONTENT_ERROR, tid, content);
 				collector.ack(tuple);
 				return ;
 			}
 			
 			
-			boolean isreg = redisTemplate.opsForSet().isMember(RedisConstants.REGISTE_SET_TID_MEMCACHE, tid);
+			boolean isreg = redisTemplate.opsForSet().isMember(RedisConstants.CONFIGREGACTIVE_SET_TID_MEMCACHE, tid);
 			if(!isreg) {
-				isreg = redisTemplate.opsForSet().isMember(RedisConstants.REGISTE_SET_TID_PERSISTENT, tid);
+				isreg = redisTemplate.opsForSet().isMember(RedisConstants.CONFIGREGACTIVE_SET_TID_PERSISTENT, tid);
 			}
 			
 			if(isreg) {
 				//	已经注册
 				
-				boolean isExistMem = redisTemplate.opsForSet().isMember(RedisConstants.REGACTIVE_SET_TID_MEMCACHE, tid);
+				boolean isExistMem = redisTemplate.opsForSet().isMember(RedisConstants.CONFIGREGACTIVE_SET_TID_MEMCACHE, tid);
 				if(!isExistMem) {
-					isExistMem = redisTemplate.opsForSet().isMember(RedisConstants.REGACTIVE_SET_TID_PERSISTENT, tid);
+					isExistMem = redisTemplate.opsForSet().isMember(RedisConstants.CONFIGREGACTIVE_SET_TID_PERSISTENT, tid);
 				}
 				
 				//	已经激活
@@ -76,8 +76,8 @@ public class ConfigRegActivePersistentBolt implements IRichBolt {
 					}
 					
 					if(listlen == 3) {
-						redisTemplate.opsForSet().add(RedisConstants.REGACTIVE_SET_TID_MEMCACHE, tid);
-						redisTemplate.opsForHash().putIfAbsent(RedisConstants.REGACTIVE_HASH_CONTENT, tid, content);
+						redisTemplate.opsForSet().add(RedisConstants.CONFIGREGACTIVE_SET_TID_MEMCACHE, tid);
+						redisTemplate.opsForHash().putIfAbsent(RedisConstants.CONFIGREGACTIVE_HASH_CONTENT, tid, content);
 						redisTemplate.delete(LIST_KEY_PREFIX+tid);
 					}
 				} else {
@@ -88,7 +88,7 @@ public class ConfigRegActivePersistentBolt implements IRichBolt {
 			}
 			
 		} catch (Exception e) {
-			redisTemplate.opsForHash().put(RedisConstants.REGACTIVE_HASH_CONTENT_ERROR, tid, content+"#"+this.getClass().getName()+"#"+e.getMessage());
+			redisTemplate.opsForHash().put(RedisConstants.CONFIGREGACTIVE_HASH_CONTENT_ERROR, tid, content+"#"+this.getClass().getName()+"#"+e.getMessage());
 		} finally {
 			collector.ack(tuple);
 		}
