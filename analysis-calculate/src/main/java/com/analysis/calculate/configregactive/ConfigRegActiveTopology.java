@@ -24,7 +24,7 @@ public class ConfigRegActiveTopology {
 		final String filterBolt = "filter_bolt";
 		final String persistentBolt = "persistent_bolt";
 		
-		final int STORM_WORKER_NUM = 2;
+		final int STORM_WORKER_NUM = 4;
 		
 		BrokerHosts brokerHosts = new ZkHosts(Configuration.ZOOKEEPER_KAFKA_ROOT_PATH, Configuration.ZOOKEEPER_KAFKA_BROKER_PATH);
 		
