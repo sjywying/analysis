@@ -2,7 +2,8 @@ package com.analysis.calculate.common.metadata;
 
 public enum TopicType {
 
-	REGISTER("注册", "1", "register");
+	REGISTER("注册", "1", "register"),
+	CONFIGREGACTIVE("配置注册激活", "1", "configregactive");
 
 	private String text;
 	private String code;
