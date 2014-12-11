@@ -10,6 +10,7 @@ import backtype.storm.LocalCluster;
 import backtype.storm.StormSubmitter;
 import backtype.storm.spout.SchemeAsMultiScheme;
 import backtype.storm.topology.TopologyBuilder;
+import backtype.storm.utils.Utils;
 
 import com.analysis.calculate.common.metadata.Configuration;
 import com.analysis.calculate.common.metadata.NginxConstants;
@@ -18,7 +19,6 @@ import com.analysis.calculate.common.metadata.TopicType;
 public class RegisterTopology {
 	public static void main(String[] args) throws Exception {
 		
-		final String topologyName = "reg_topology";
 		final String spoutId = "reg_spout";
 		final String parserBolt = "reg_parser_bolt";
 		final String filterBolt = "reg_filter_bolt";
@@ -41,13 +41,13 @@ public class RegisterTopology {
 		Config conf = new Config();
 		if (args != null && args.length > 0) {
 			conf.setNumWorkers(STORM_WORKER_NUM);
-			StormSubmitter.submitTopology(topologyName, conf, builder.createTopology());
+			StormSubmitter.submitTopology(args[0], conf, builder.createTopology());
 		} else {
 			LocalCluster cluster = new LocalCluster();
-			cluster.submitTopology(topologyName + "_local", conf, builder.createTopology());
-//			Utils.sleep(100000);
-//			cluster.killTopology("active_topology");
-//			cluster.shutdown();
+			cluster.submitTopology("reg_topology_local", conf, builder.createTopology());
+			Utils.sleep(100000);
+			cluster.killTopology("reg_topology_local");
+			cluster.shutdown();
 		}
 	}
 }

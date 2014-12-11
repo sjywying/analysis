@@ -38,6 +38,7 @@ public class RegisterPersistentBolt implements IRichBolt {
 		try {
 			if(RegisterParserBolt.FIELDS_TID_VALUE_ERROR_DEFAULT.equals(tid)) {
 				redisTemplate.opsForHash().put(RedisConstants.REGISTE_HASH_CONTENT_ERROR, tid, content);
+				collector.ack(tuple);
 				return ;
 			}
 			

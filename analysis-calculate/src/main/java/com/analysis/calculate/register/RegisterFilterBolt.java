@@ -44,6 +44,12 @@ public class RegisterFilterBolt implements IRichBolt {
 				bean = (Register) tuple.getValueByField(RegisterParserBolt.FIELDS_CONTENT);
 				content = JSON.toJSONString(bean);
 				
+				if(!bean.check()) {
+					collector.emit(new Values(RegisterParserBolt.FIELDS_TID_VALUE_ERROR_DEFAULT, content+"#selfcheckfalse#"));
+					collector.ack(tuple);
+					return;
+				}
+				
 				if(Constants.NO_MD5_CHECK || Strings.compareTidMD5(tid, bean.getUa())) {
 					collector.emit(new Values(tid, content));
 				} else {
