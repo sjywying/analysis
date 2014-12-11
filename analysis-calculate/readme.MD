@@ -44,3 +44,4 @@ kafka_spout--->parser_bolt--->filter_bolt-------------------------------->persis
 	1. redis 存储时出现key 前包含 \xac\xed\x00\x05t\x00\x10
 	2. flume没有数据过一段时间就会有几分钟无法传输数据
 	3. 无法并列执行bolt，每次都是随机的分给一个bolt，另外一个分支得不到。
+	4. 存入redis 速度慢

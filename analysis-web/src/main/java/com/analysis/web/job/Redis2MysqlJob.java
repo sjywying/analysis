@@ -11,11 +11,13 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import com.alibaba.fastjson.JSON;
+import com.analysis.api.bean.ConfigRegActive;
 import com.analysis.api.bean.RegActive;
 import com.analysis.api.bean.Register;
 import com.analysis.common.constants.RedisConstants;
 import com.analysis.common.utils.IPMetadataParser;
 import com.analysis.common.utils.Strings;
+import com.analysis.web.mapper.ConfigRegActiveMapper;
 import com.analysis.web.mapper.RegActiveMapper;
 import com.analysis.web.mapper.RegisterMapper;
 
@@ -27,6 +29,7 @@ public class Redis2MysqlJob {
 	@Autowired private StringRedisTemplate redisTemplate;
 	@Autowired private RegisterMapper registeMapper;
 	@Autowired private RegActiveMapper regActiveMapper;
+	@Autowired private ConfigRegActiveMapper configRegActiveMapper;
 
 	static {
 		IPMetadataParser.init();
@@ -81,9 +84,9 @@ public class Redis2MysqlJob {
 			}
 			
 			try {
-				Register registe = JSON.parseObject(content, Register.class);
-				registe.setType(IPMetadataParser.getCountry(registe.getIp()));
-				registeMapper.insert(registe);
+				ConfigRegActive configRegActive = JSON.parseObject(content, ConfigRegActive.class);
+				configRegActive.setType(IPMetadataParser.getCountry(configRegActive.getIp()));
+				configRegActiveMapper.insert(configRegActive);
 				redisTemplate.opsForSet().move(RedisConstants.CONFIGREGACTIVE_SET_TID_MEMCACHE, tid, RedisConstants.CONFIGREGACTIVE_SET_TID_PERSISTENT);
 				logger.debug("redis data to mysql finish");
 			} catch (Exception e) {
