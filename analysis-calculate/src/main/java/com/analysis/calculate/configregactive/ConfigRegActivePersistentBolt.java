@@ -46,9 +46,9 @@ public class ConfigRegActivePersistentBolt implements IRichBolt {
 			}
 			
 			
-			boolean isreg = redisTemplate.opsForSet().isMember(RedisConstants.CONFIGREGACTIVE_SET_TID_MEMCACHE, tid);
+			boolean isreg = redisTemplate.opsForSet().isMember(RedisConstants.REGISTE_SET_TID_MEMCACHE, tid);
 			if(!isreg) {
-				isreg = redisTemplate.opsForSet().isMember(RedisConstants.CONFIGREGACTIVE_SET_TID_PERSISTENT, tid);
+				isreg = redisTemplate.opsForSet().isMember(RedisConstants.REGISTE_SET_TID_PERSISTENT, tid);
 			}
 			
 			if(isreg) {
