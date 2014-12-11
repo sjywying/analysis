@@ -15,6 +15,7 @@ import backtype.storm.tuple.Values;
 
 import com.alibaba.fastjson.JSON;
 import com.analysis.api.bean.Register;
+import com.analysis.common.constants.Constants;
 import com.analysis.common.utils.Strings;
 
 public class RegisterFilterBolt implements IRichBolt {
@@ -43,7 +44,7 @@ public class RegisterFilterBolt implements IRichBolt {
 				bean = (Register) tuple.getValueByField(RegisterParserBolt.FIELDS_CONTENT);
 				content = JSON.toJSONString(bean);
 				
-				if(Strings.compareTidMD5(tid, bean.getUa())) {
+				if(Constants.NO_MD5_CHECK || Strings.compareTidMD5(tid, bean.getUa())) {
 					collector.emit(new Values(tid, content));
 				} else {
 					collector.emit(new Values(RegisterParserBolt.FIELDS_TID_VALUE_ERROR_DEFAULT, content));

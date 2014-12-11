@@ -16,6 +16,7 @@ import backtype.storm.tuple.Values;
 import com.alibaba.fastjson.JSON;
 import com.analysis.calculate.common.metadata.NginxConstants;
 import com.analysis.calculate.common.metadata.NginxTopicType;
+import com.analysis.common.constants.Constants;
 import com.analysis.common.utils.Strings;
 
 public class NginxLogFilterBolt implements IRichBolt {
@@ -46,7 +47,7 @@ public class NginxLogFilterBolt implements IRichBolt {
 				NginxTopicType type = NginxTopicType.uriOf(uri);
 				if(type != null) {
 					String topic = type.getTopic();
-					if(Strings.compareTidMD5(tid, ua)) {
+					if(Constants.NO_MD5_CHECK || Strings.compareTidMD5(tid, ua)) {
 						collector.emit(new Values(topic, JSON.toJSONString(content)));
 					} else {
 						logger.debug("user-agent passwd is illegal. ua:{}, tid:{}", ua, tid);
