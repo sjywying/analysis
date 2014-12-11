@@ -8,6 +8,7 @@ import backtype.storm.tuple.Tuple;
 import backtype.storm.tuple.Values;
 
 import com.analysis.api.bean.Register;
+import com.analysis.common.utils.DateUtils;
 
 public class RegisterParserBolt extends BaseBasicBolt {
 	
@@ -24,7 +25,7 @@ public class RegisterParserBolt extends BaseBasicBolt {
 		try {
 			String[] logArr = log.split(",");
 			Register bean = new Register();
-			bean.setCtime(logArr[0]);
+			bean.setCtime(DateUtils.transition(logArr[0]));
 			bean.setIp(logArr[1]);
 			bean.setTid(logArr[2]);
 			bean.setImsi(logArr[3]);

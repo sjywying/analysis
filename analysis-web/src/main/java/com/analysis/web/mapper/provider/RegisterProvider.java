@@ -11,7 +11,7 @@ public class RegisterProvider {
     
 	public String insert(Register register) {
 		//TODO 源头格式化
-		String ctime = register.getCtime().substring(0, 7).replace("-", "");
+		String ctime = register.getCtime().substring(0, 6);
 		
 		SQL sql = new SQL();
 		sql.INSERT_INTO(TABLE_NAME_PREFIX + ctime)
