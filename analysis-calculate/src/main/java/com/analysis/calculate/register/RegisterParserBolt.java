@@ -37,9 +37,9 @@ public class RegisterParserBolt extends BaseBasicBolt {
 			bean.setR(logArr[9]);
 			bean.setCcode(logArr[10]);
 			bean.setL(logArr[11]);
-//			if(logArr.length >= 13) {
-			bean.setUa(logArr[12]);
-//			}
+			if(logArr.length >= 13) {
+				bean.setUa(logArr[12]);
+			}
 		
 			collector.emit(new Values(bean.getTid(), bean));
 		} catch (Exception e) {
