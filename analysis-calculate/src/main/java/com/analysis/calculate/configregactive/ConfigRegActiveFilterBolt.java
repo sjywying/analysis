@@ -11,7 +11,7 @@ import backtype.storm.tuple.Tuple;
 import backtype.storm.tuple.Values;
 
 import com.alibaba.fastjson.JSON;
-import com.analysis.api.bean.ConfigActive;
+import com.analysis.api.bean.ConfigRegActive;
 import com.analysis.common.constants.Constants;
 import com.analysis.common.utils.Strings;
 
@@ -44,7 +44,7 @@ public class ConfigRegActiveFilterBolt implements IRichBolt {
 				
 			} else {
 				
-				ConfigActive bean = (ConfigActive) tuple.getValueByField(ConfigRegActiveParserBolt.FIELDS_CONTENT);
+				ConfigRegActive bean = (ConfigRegActive) tuple.getValueByField(ConfigRegActiveParserBolt.FIELDS_CONTENT);
 				
 				content = JSON.toJSONString(bean);
 				

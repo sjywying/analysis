@@ -7,7 +7,7 @@ import backtype.storm.tuple.Fields;
 import backtype.storm.tuple.Tuple;
 import backtype.storm.tuple.Values;
 
-import com.analysis.api.bean.ConfigActive;
+import com.analysis.api.bean.ConfigRegActive;
 import com.analysis.common.utils.DateUtils;
 
 
@@ -31,18 +31,18 @@ public class ConfigRegActiveParserBolt extends BaseBasicBolt {
 			//	日志进行文件切分时会产生一个只包含日期的行
 			if(logArr.length < 3) return ;
 			
-			ConfigActive bean = new ConfigActive();
+			ConfigRegActive bean = new ConfigRegActive();
 			bean.setCtime(DateUtils.transition(logArr[0]));
 			bean.setIp(logArr[1]);
 			bean.setTid(logArr[2]);
 			bean.setImsi(logArr[3]);
 			bean.setImei(logArr[4]);
-			bean.setAdccompany(logArr[5]);
-			bean.setModel(logArr[6]);
+			bean.setC(logArr[5]);
+			bean.setM(logArr[6]);
 			bean.setAv(logArr[7]);
-			bean.setPkgname(logArr[8]);
+			bean.setPname(logArr[8]);
 			bean.setAn(logArr[9]);
-			bean.setCityid(logArr[10]);
+			bean.setCcode(logArr[10]);
 			if(logArr.length >= 12) {
 				ua = logArr[11];
 			}
