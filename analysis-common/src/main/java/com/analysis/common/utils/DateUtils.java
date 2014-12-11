@@ -19,6 +19,6 @@ public class DateUtils {
 			throw new RuntimeException("date string is empty");
 		}
 		
-		return dateStr.replace("-", "").replace(":", "").trim();
+		return dateStr.replace("-", "").replace(":", "").replace(" ", "");
 	}
 }
