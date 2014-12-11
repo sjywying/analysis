@@ -12,5 +12,7 @@
 		<result column="an" jdbcType="VARCHAR" property="an" />
 		<result column="ip" jdbcType="VARCHAR" property="ip" />
 		<result column="type" jdbcType="VARCHAR" property="type" />
+		<result column="pname" jdbcType="VARCHAR" property="pname" />
+		<result column="ccode" jdbcType="VARCHAR" property="ccode" />
 	</resultMap>
 </mapper>
