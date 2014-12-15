@@ -12,6 +12,7 @@ public interface RedisConstants {
 	public static final String CONFIGREGACTIVE_SET_TID_PERSISTENT = "configregactive_tid_persistent";
 	public static final String CONFIGREGACTIVE_HASH_CONTENT = "configregactive_content";
 	public static final String CONFIGREGACTIVE_HASH_CONTENT_ERROR = "configregactive_content_error";
+	public static final String CONFIGREGACTIVE_LIST_KEY_PREFIX = "regactive_list_";
 	
 	
 	public static final String REGACTIVE_SET_TID_MEMCACHE = "regactive_tid_memcache";
