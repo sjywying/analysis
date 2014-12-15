@@ -18,8 +18,6 @@ public class ConfigRegActivePersistentBolt implements IRichBolt {
 	
 	private static final long serialVersionUID = 1L;
 	
-	private static final String LIST_KEY_PREFIX = "regactive_list_";
-	
 	private transient OutputCollector collector;
 	
 	private static ApplicationContext applicationContext = SpringApplicationContextFactory.instance();
@@ -61,12 +59,12 @@ public class ConfigRegActivePersistentBolt implements IRichBolt {
 				
 				//	已经激活
 				if(!isExistMem) {
-					long listlen = redisTemplate.opsForList().size(LIST_KEY_PREFIX+tid);
-					if(listlen < 3) {
+					long listlen = redisTemplate.opsForList().size(RedisConstants.CONFIGREGACTIVE_LIST_KEY_PREFIX+tid);
+					if(listlen < 4) {
 						// TODO 缺乏对reg时间的对比， 暂时忽略（原因是实时）
-						String pdate = redisTemplate.opsForList().index(LIST_KEY_PREFIX+tid, listlen-1);
+						String pdate = redisTemplate.opsForList().index(RedisConstants.CONFIGREGACTIVE_LIST_KEY_PREFIX+tid, listlen-1);
 						if(!ConfigRegActiveFilterBolt.FIELDS_CTIME_DEFAULT_VALUE.equals(ctime) && !ctime.equals(pdate)) {
-							redisTemplate.opsForList().rightPush(LIST_KEY_PREFIX+tid, ctime);
+							redisTemplate.opsForList().rightPush(RedisConstants.CONFIGREGACTIVE_LIST_KEY_PREFIX+tid, ctime);
 							listlen ++;
 						} else {
 							
@@ -78,7 +76,7 @@ public class ConfigRegActivePersistentBolt implements IRichBolt {
 					if(listlen == 3) {
 						redisTemplate.opsForSet().add(RedisConstants.CONFIGREGACTIVE_SET_TID_MEMCACHE, tid);
 						redisTemplate.opsForHash().putIfAbsent(RedisConstants.CONFIGREGACTIVE_HASH_CONTENT, tid, content);
-						redisTemplate.delete(LIST_KEY_PREFIX+tid);
+						redisTemplate.delete(RedisConstants.CONFIGREGACTIVE_LIST_KEY_PREFIX+tid);
 					}
 				} else {
 					

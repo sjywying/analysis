@@ -49,8 +49,10 @@ public class RegisterPersistentBolt implements IRichBolt {
 			
 			if(!isExistMem) {
 //				TODO transaction
+				String ctime = tuple.getStringByField(RegisterFilterBolt.FIELDS_CTIME);
 				redisTemplate.opsForSet().add(RedisConstants.REGISTE_SET_TID_MEMCACHE, tid);
 				redisTemplate.opsForHash().putIfAbsent(RedisConstants.REGISTE_HASH_CONTENT, tid, content);
+				redisTemplate.opsForList().rightPush(RedisConstants.CONFIGREGACTIVE_LIST_KEY_PREFIX+tid, ctime);
 			} else {
 				redisTemplate.opsForHash().put(RedisConstants.REGISTE_HASH_CONTENT_ERROR, tid, content+"#isexisttrue#");
 			}

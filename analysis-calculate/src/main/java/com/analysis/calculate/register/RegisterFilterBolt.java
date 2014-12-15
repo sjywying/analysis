@@ -24,6 +24,8 @@ public class RegisterFilterBolt implements IRichBolt {
 	
 	private static final Logger logger = LoggerFactory.getLogger(RegisterFilterBolt.class);
 	
+	public static final String FIELDS_CTIME = "ctime";
+	
 	private transient OutputCollector collector;
 	
 	@Override
@@ -39,25 +41,25 @@ public class RegisterFilterBolt implements IRichBolt {
 			Register bean = null;
 			if(RegisterParserBolt.FIELDS_TID_VALUE_ERROR_DEFAULT.equals(tid)) {
 				content = tuple.getStringByField(RegisterParserBolt.FIELDS_CONTENT);
-				collector.emit(new Values(RegisterParserBolt.FIELDS_TID_VALUE_ERROR_DEFAULT, content));
+				collector.emit(new Values(RegisterParserBolt.FIELDS_TID_VALUE_ERROR_DEFAULT, content, ""));
 			} else {
 				bean = (Register) tuple.getValueByField(RegisterParserBolt.FIELDS_CONTENT);
 				content = JSON.toJSONString(bean);
 				
 				if(!bean.check()) {
-					collector.emit(new Values(RegisterParserBolt.FIELDS_TID_VALUE_ERROR_DEFAULT, content+"#selfcheckfalse#"));
+					collector.emit(new Values(RegisterParserBolt.FIELDS_TID_VALUE_ERROR_DEFAULT, content+"#selfcheckfalse#", ""));
 					collector.ack(tuple);
 					return;
 				}
 				
 				if(Constants.NO_MD5_CHECK || Strings.compareTidMD5(tid, bean.getUa())) {
-					collector.emit(new Values(tid, content));
+					collector.emit(new Values(tid, content, bean.getCtime().substring(0, 8)));
 				} else {
-					collector.emit(new Values(RegisterParserBolt.FIELDS_TID_VALUE_ERROR_DEFAULT, content+"#MD5checkfalse#"));
+					collector.emit(new Values(RegisterParserBolt.FIELDS_TID_VALUE_ERROR_DEFAULT, content+"#MD5checkfalse#", ""));
 				}
 			}
 		} catch (Exception e) {
-			collector.emit(new Values(RegisterParserBolt.FIELDS_TID_VALUE_ERROR_DEFAULT, content + "#"+this.getClass().getName()+"#" + e.getMessage()));
+			collector.emit(new Values(RegisterParserBolt.FIELDS_TID_VALUE_ERROR_DEFAULT, content + "#"+this.getClass().getName()+"#" + e.getMessage(), ""));
 //			logger.error("exception message: {}, content: {} ", e.getMessage(), content);
 		} finally {
 			collector.ack(tuple);
@@ -67,7 +69,7 @@ public class RegisterFilterBolt implements IRichBolt {
 
 	@Override
 	public void declareOutputFields(OutputFieldsDeclarer declarer) {
-		declarer.declare(new Fields(RegisterParserBolt.FIELDS_TID, RegisterParserBolt.FIELDS_CONTENT));
+		declarer.declare(new Fields(RegisterParserBolt.FIELDS_TID, RegisterParserBolt.FIELDS_CONTENT, FIELDS_CTIME));
 	}
 
 	@Override
