@@ -1,5 +1,9 @@
 package com.analysis.common.utils;
 
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+
 
 public class DateUtils {
 
@@ -20,4 +24,54 @@ public class DateUtils {
 		
 		return dateStr.replace("-", "").replace(":", "").replace(" ", "");
 	}
+	
+	public static String getCurrentMonth() {
+		Calendar cal = Calendar.getInstance();
+		int year = cal.get(Calendar.YEAR);
+		int month = cal.get(Calendar.MONTH )+1;
+		
+		return ""+year+month;
+	}
+	
+	public static List<String> getMonthStartWith(String yyyymm) {
+		List<String> yyyymms = new ArrayList<String>();
+		
+		boolean temp = true;
+		int i = 0;
+		while (temp) {
+			Calendar cal = Calendar.getInstance();
+			cal.add(Calendar.MONTH, i);
+			int year = cal.get(Calendar.YEAR);
+			int month = cal.get(Calendar.MONTH)+1;
+			
+			
+			String currentDate = "";
+			if(month >= 10){
+				currentDate = currentDate+year+month;
+			} else {
+				currentDate = year+"0"+month;
+			}
+			
+			if(currentDate.equals(yyyymm) || i < -11) {
+				temp = false;
+			}
+			
+			yyyymms.add(currentDate);
+			
+			i--;
+		}
+		
+		
+		return yyyymms;
+	}
+	
+//	public static void main(String[] args) {
+//		System.out.println(getCurrentMonth());
+//		
+//		List<String> list = getMonthStartWith("201310");
+//		
+//		for (String str : list) {
+//			System.out.println(str);
+//		}
+//	}
 }

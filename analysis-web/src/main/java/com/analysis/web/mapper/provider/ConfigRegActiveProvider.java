@@ -10,7 +10,6 @@ public class ConfigRegActiveProvider {
 	private static final String TABLE_NAME_PREFIX = "biz_configregactive_";
     
 	public String insert(ConfigRegActive bean) {
-		//TODO 源头格式化
 		String ctime = bean.getCtime().substring(0, 6);
 		
 		SQL sql = new SQL();
@@ -31,5 +30,5 @@ public class ConfigRegActiveProvider {
 		
 		return sql.toString();
 	}
-    
+	
 }

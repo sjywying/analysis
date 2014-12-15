@@ -15,4 +15,8 @@
 		<result column="pname" jdbcType="VARCHAR" property="pname" />
 		<result column="ccode" jdbcType="VARCHAR" property="ccode" />
 	</resultMap>
+	
+	<select id="countByChannelAndCtime" resultType="int" statementType="STATEMENT">
+		select count(1) from biz_configregactive_${ctime} where channel=${channel}
+	</select>
 </mapper>
