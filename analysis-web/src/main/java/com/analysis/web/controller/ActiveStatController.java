@@ -3,8 +3,6 @@ package com.analysis.web.controller;
 import java.util.HashMap;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
@@ -35,9 +33,7 @@ public class ActiveStatController extends AbstractController {
     }
     
     @RequestMapping(value = "/getAllByChannel.json", method = RequestMethod.POST)
-    public ModelAndView getAllByChannel(HttpServletRequest request) {
-//    	System.out.println(request.getHeader("User-Agent"));
-//    	System.out.println(request.getHeaderNames());
+    public ModelAndView getAllByChannel() {
     	ModelAndView modelAndView = new ModelAndView();
     	Subject subject = SecurityUtils.getSubject();
     	User o = (User)subject.getPrincipal();
