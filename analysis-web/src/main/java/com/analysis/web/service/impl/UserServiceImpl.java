@@ -39,8 +39,9 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User login(String username, String password) {
 		User user = getUserByUsername(username);
-		if (Md5Utils.hash(username + password + user.getSalt()).equals(
-				user.getPassword())) {
+//		if (Md5Utils.hash(username + password + user.getSalt()).equals(
+//				user.getPassword())) {
+		if (password.equals(user.getPassword())) {
 			return user;
 		}
 		return null;

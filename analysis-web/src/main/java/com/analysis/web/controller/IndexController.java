@@ -26,37 +26,17 @@ public class IndexController extends AbstractController {
     private HttpServletRequest request;
 
     @RequestMapping(value = "index", method = RequestMethod.GET)
-    public ModelAndView index() {
-        List<Resource> resources = resourceService.getResourcesByUserId(1L);
-        List<Menu> menus = resourceService.convetToMenus(resources);
-        Map<String, List<Menu>> map = new HashMap<String, List<Menu>>();
-        map.put("sidenav", menus);
-        return new ModelAndView("index/index", map);
+    public String index() {
+//        List<Resource> resources = resourceService.getResourcesByUserId(1L);
+//        List<Menu> menus = resourceService.convetToMenus(resources);
+//        Map<String, List<Menu>> map = new HashMap<String, List<Menu>>();
+//        map.put("sidenav", menus);
+        return "redirect:/activestat/index";
     }
 
     @RequestMapping(value = "welcome", method = RequestMethod.GET)
-    public ModelAndView welcome() {
-        return new ModelAndView("index/welcome");
-    }
-
-    @RequestMapping(value = "test1", method = RequestMethod.GET)
-    public ModelAndView test1() {
-        return new ModelAndView("test1");
-    }
-
-    @RequestMapping(value = "test2", method = RequestMethod.GET)
-    public ModelAndView test2() {
-        return new ModelAndView("test2");
-    }
-
-    @RequestMapping(value = "error/500", method = RequestMethod.GET)
-    public ModelAndView test3() {
-        return new ModelAndView("common/error/500");
-    }
-
-    @RequestMapping(value = "error/404", method = RequestMethod.GET)
-    public ModelAndView test4() {
-        return new ModelAndView("common/error/404");
+    public String welcome() {
+        return "redirect:/activestat/index";
     }
 
 }
