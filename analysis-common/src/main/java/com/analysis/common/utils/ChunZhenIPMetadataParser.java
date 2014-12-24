@@ -15,6 +15,11 @@ import com.analysis.common.utils.Strings;
 
 public class ChunZhenIPMetadataParser {
 	
+	public static void main(String[] args) {
+		ChunZhenIPMetadataParser.init();
+		
+	}
+	
 	private static final Logger logger = LoggerFactory.getLogger(ChunZhenIPMetadataParser.class);
 
 	private static TreeMap<Long, String> ipcountry = new TreeMap<Long, String>();
@@ -59,6 +64,8 @@ public class ChunZhenIPMetadataParser {
 						iparr[i] = str;
 						i++;
 					}
+					
+					if(i == 3) break;
 				}
 				
 				if(iparr != null && iparr.length == 4) {
