@@ -11,9 +11,53 @@ import java.util.TreeMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.analysis.common.utils.Strings;
-
 public class IPMetadataParser {
+	
+	public static void main(String[] args) {
+		
+		IPMetadataParser.init();
+		String imsi = "99903460003872522822";
+		String tid = "e864674020526718";
+		String ip = "1.0.32.2";
+		
+//		1. 内， 2. 外单 ，3. 异常内丹， 4 异常外单
+		int type;
+
+//	 	以460开头为内单，无需考虑IP
+		if(imsi.startsWith("460")) {
+			type = 1;
+		}
+//		以99903开头，激活当时访问IP为国内视为内单，访问IP非国内视为外单，无法取得IP视为异常
+		else if(imsi.startsWith("99903")) {
+			
+			if(ip == null || "".equals(ip) || "null".equals(ip.toLowerCase())) {
+				type = 0;
+			} else if(IPMetadataParser.foreignIp(ip)) {
+				type = 4;
+			} else {
+				type = 3;
+			}
+		}
+//		非460和99903开头视为外单，无需考虑IP
+		else {
+			type = 2;
+		}
+		
+		System.out.println(type + ", " + IPMetadataParser.getCountry(ip));
+	}
+	
+	public static boolean foreignIp(String ip) {
+		try {
+			String lg = getCountry(ip);
+			if(!"cn".equals(lg)) {
+				return true;
+			} else {
+				return false;
+			}
+		} catch (Exception e) {
+			return false;
+		}
+	}
 	
 	private static final Logger logger = LoggerFactory.getLogger(IPMetadataParser.class);
 
@@ -61,7 +105,7 @@ public class IPMetadataParser {
 					}
 					
 					endindex = iplongend+1;
-					ipcountry.put(iplongstar, arrs[2]);
+					ipcountry.put(iplongstar, arrs[2].toLowerCase());
 				} else {
 					logger.error("file dbip-country.csv is illegal, has exist array length not equal 3.");
 					break;

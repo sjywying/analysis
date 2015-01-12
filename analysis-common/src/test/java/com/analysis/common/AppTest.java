@@ -1,38 +1,21 @@
 package com.analysis.common;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import java.util.TreeMap;
 
-/**
- * Unit test for simple App.
- */
-public class AppTest 
-    extends TestCase
-{
-    /**
-     * Create the test case
-     *
-     * @param testName name of the test case
-     */
-    public AppTest( String testName )
-    {
-        super( testName );
-    }
 
-    /**
-     * @return the suite of tests being tested
-     */
-    public static Test suite()
-    {
-        return new TestSuite( AppTest.class );
-    }
-
-    /**
-     * Rigourous Test :-)
-     */
-    public void testApp()
-    {
-        assertTrue( true );
-    }
+public class AppTest {
+	
+//	
+//	public static void main(String[] args) {
+//		String log = "1123,234";
+//		System.out.println(log.substring(0, log.indexOf(',')));
+//	}
+//	
+	
+	public static void main(String[] args) {
+		TreeMap<String, String> tmap = new TreeMap<String, String>();
+		tmap.put("1", "1111");
+		tmap.put("2", "2222");
+		System.out.println(tmap.firstEntry().getValue());
+	}
 }

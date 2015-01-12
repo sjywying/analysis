@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.analysis.web.mapper.DAUMapper">
+  <resultMap id="DAUNum" type="com.analysis.web.bean.DAUNum">
+    <result column="ctime" jdbcType="VARCHAR" property="ctime" />
+    <result column="channel" jdbcType="VARCHAR" property="channel" />
+    <result column="pvnum" jdbcType="INTEGER" property="pvnum" />
+    <result column="uvnum" jdbcType="INTEGER" property="uvnum" />
+  </resultMap>
+  
+</mapper>

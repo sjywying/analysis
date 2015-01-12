@@ -1,4 +1,4 @@
-package com.analysis.web.job;
+/*package com.analysis.web.job;
 
 import java.util.Set;
 
@@ -135,3 +135,4 @@ public class Redis2MysqlJob {
 	}
 	
 }
+*/

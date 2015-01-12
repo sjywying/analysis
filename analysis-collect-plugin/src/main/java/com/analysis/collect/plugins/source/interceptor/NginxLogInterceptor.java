@@ -1,8 +1,11 @@
 package com.analysis.collect.plugins.source.interceptor;
 
 import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.flume.Context;
 import org.apache.flume.Event;
@@ -10,15 +13,38 @@ import org.apache.flume.interceptor.Interceptor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class RinseInterceptor implements Interceptor {
+import scala.actors.threadpool.Arrays;
 
-	private static final Logger logger = LoggerFactory
-			.getLogger(RinseInterceptor.class);
+public class NginxLogInterceptor implements Interceptor {
 
-//	private static final String NGINX_LOG_URL = "__url__";
+	private static final Logger logger = LoggerFactory.getLogger(NginxLogInterceptor.class);
 
-	// public static final String NGINX_REQUEST_PARAMS_IP = "__ip__";
-	// public static final String NGINX_REQUEST_PARAMS_CTIME = "__ctime__";
+	
+//	useragent必须包含的字符串(合法)
+	private Set<String> http_user_agent = new HashSet<String>();
+//	非法IP地址(不合法)
+	private Set<String> remote_addr = new HashSet<String>();
+//	url起始地址(合法)
+	private Set<String> urls = new HashSet<String>();
+//	参数必须包含(合法)
+	private Set<String> paramskey = new HashSet<String>();
+//	请求方式(合法)
+	private Set<String> request_method = new HashSet<String>();
+//	返回状态(合法)
+	private Set<Integer> response_status = new HashSet<Integer>();
+
+	public NginxLogInterceptor(Set<String> http_user_agent,
+			Set<String> remote_addr, Set<String> urls, Set<String> paramskey,
+			Set<String> request_method, Set<Integer> response_status) {
+		this.http_user_agent = http_user_agent;
+		this.remote_addr = remote_addr;
+		this.urls = urls;
+		this.paramskey = paramskey;
+		this.request_method = request_method;
+		this.response_status = response_status;
+	}
+
+
 
 	@Override
 	public void initialize() {
@@ -29,14 +55,10 @@ public class RinseInterceptor implements Interceptor {
 	public Event intercept(Event event) {
 		try {
 			String body = new String(event.getBody(), "UTF-8");
+//			URLDecoder.decode(body,"utf-8");
 //			logger.warn("url:{}", body);
 			
 			String[] bodyArr = body.split(" ");
-			
-			if(bodyArr.length < 8) {
-				logger.warn("nginx log length lass then 8, url:{}", body);
-				return null;
-			}
 
 			// post请求无效
 			if (bodyArr[5].contains("POST")) {
@@ -100,16 +122,67 @@ public class RinseInterceptor implements Interceptor {
 	 */
 	public static class Builder implements Interceptor.Builder {
 
+		private Set<String> http_user_agent = new HashSet<String>();
+		private Set<String> remote_addr = new HashSet<String>();
+		private Set<String> urls = new HashSet<String>();
+		private Set<String> paramskey = new HashSet<String>();
+		private Set<String> request_method = new HashSet<String>();
+		private Set<Integer> response_status = new HashSet<Integer>();
+		
+		static final String HTTP_USER_AGENT_KEY		= "http_user_agent_key";
+		static final String HTTP_REMOTE_ADDR		= "http_remote_addr";
+		static final String HTTP_URL_PRDFIX			= "http_url_prdfix";
+		static final String HTTP_REQUEST_PARAMS_KEY	= "http_request_params_key";
+		static final String HTTP_REQUEST_METHOD		= "http_request_method";
+		static final String HTTP_RESPONSE_STATUS	= "http_response_status";
+		
 		@Override
 		public Interceptor build() {
-			return new RinseInterceptor();
+			return new NginxLogInterceptor(http_user_agent,remote_addr,urls,paramskey,request_method,response_status);
 		}
 
 		@Override
 		public void configure(Context context) {
+			String userAgentKeyWord = context.getString(HTTP_USER_AGENT_KEY);
+			if(isNotEmpty(userAgentKeyWord)) {
+				http_user_agent.addAll(Arrays.asList(userAgentKeyWord.split(",")));
+			}
+			
+			String remoteAddr = context.getString(HTTP_REMOTE_ADDR);
+			if(isNotEmpty(remoteAddr)) {
+				remote_addr.addAll(Arrays.asList(remoteAddr.split(",")));
+			}
+			
+			String urlsStr = context.getString(HTTP_URL_PRDFIX);
+			if(isNotEmpty(urlsStr)) {
+				urls.addAll(Arrays.asList(urlsStr.split(",")));
+			}
+			
+			String paramskeyStr = context.getString(HTTP_REQUEST_PARAMS_KEY);
+			if(isNotEmpty(paramskeyStr)) {
+				paramskey.addAll(Arrays.asList(paramskeyStr.split(",")));
+			}
+			
+			String requestMethodStr = context.getString(HTTP_REQUEST_METHOD);
+			if(isNotEmpty(requestMethodStr)) {
+				urls.addAll(Arrays.asList(requestMethodStr.split(",")));
+			}
+			
+			String responseStatusStr = context.getString(HTTP_RESPONSE_STATUS);
+			if(isNotEmpty(responseStatusStr)) {
+				response_status.addAll(Arrays.asList(responseStatusStr.split(",")));
+			}
 		}
 
+		private boolean isNotEmpty(String str) {
+			if(str == null || "".equals(str.trim())) {
+				return false;
+			} else {
+				return true;
+			}
+		}
 	}
+	
 
 	// private static Map<String, String> parserUrl(String url) {
 	// Map<String, String> map = new HashMap<String, String>();

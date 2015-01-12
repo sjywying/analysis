@@ -10,7 +10,7 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		<title>出货统计</title>
 		
-		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.js"></script>
+		<script type="text/javascript" src="../static/js/jquery-1.9.1.js"></script>
 		
 		<script src="../static/highcharts/highcharts.js"></script>
 <!-- 		<script src="../static/highcharts/modules/data.js"></script> -->
