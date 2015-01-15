@@ -9,7 +9,7 @@
 <head>
 </head>
 <body>
-<a href='<%=path %>/manuActiveStat/index'>出货信息</a>
-<a href='<%=path %>/dau/index'>出货信息</a>
+<a href='<%=path %>/activestat/index'>出货信息</a>
+<a href='<%=path %>/dau/index'>日活信息</a>
 </body>
 </html>

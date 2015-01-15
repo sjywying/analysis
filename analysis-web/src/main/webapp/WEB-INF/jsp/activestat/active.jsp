@@ -28,7 +28,7 @@ $(function () {
             text: '各月份出货统计'
         },
         subtitle: {
-            text: ''
+            text: '统计标准：注册后不再同一天内的第三天算作激活。'
         },
         xAxis: {
             type: 'category'
@@ -127,5 +127,6 @@ $(function () {
 	</head>
 <body>
 <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+<a href="javascript:history.go(-1);">返回</a>
 </body>
 </html>
