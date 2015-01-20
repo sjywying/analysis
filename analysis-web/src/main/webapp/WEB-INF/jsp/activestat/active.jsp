@@ -28,7 +28,8 @@ $(function () {
             text: '各月份出货统计'
         },
         subtitle: {
-            text: '统计标准：注册后不再同一天内的第三天算作激活。'
+            //text: '统计标准：注册后不再同一天内的第三天算作激活。'
+            text: ''
         },
         xAxis: {
             type: 'category'
