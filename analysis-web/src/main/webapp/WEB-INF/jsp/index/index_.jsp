@@ -33,13 +33,13 @@
 <body>
 <div class="leftMenu">
    <ul class="nav nav-pills nav-stacked">
-   <li ><a class="active">出货信息</a></li>
+   <li class="active"><a>出货信息</a></li>
    <li class=""><a href="#">日活信息</a></li>
    <li><a href="/sm/logout">退出</a></li>
 </ul>
 </div>
 <div class="rightContent">
-   <iframe  style="display:block;"  frameborder="no" border="0" marginwidth="0" marginheight="0" scrolling="no" allowtransparency="yes" class="iframeCopntent" src=""></iframe>
+   <iframe  style="display:block;"  frameborder="no" border="0" marginwidth="0" marginheight="0" scrolling="no" allowtransparency="yes" class="iframeCopntent" src="<%=path %>/activestat/index"></iframe>
 </div>
 <script type="text/javascript">
     $(".leftMenu").find("li").click(function(){
