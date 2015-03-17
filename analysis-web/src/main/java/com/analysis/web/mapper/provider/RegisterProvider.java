@@ -31,5 +31,12 @@ public class RegisterProvider {
 		
 		return sql.toString();
 	}
-    
+
+
+	public String selectByChannel(String channel, String cdate) {
+		SQL sql = new SQL();
+		sql.SELECT("count(1)").FROM(TABLE_NAME_PREFIX + cdate).WHERE("channel = " + channel);
+
+		return sql.toString();
+	}
 }

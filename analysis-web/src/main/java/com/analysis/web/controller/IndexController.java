@@ -5,6 +5,9 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.analysis.web.bean.User;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,8 +31,14 @@ public class IndexController extends AbstractController {
 //        List<Resource> resources = resourceService.getResourcesByUserId(1L);
 //        List<Menu> menus = resourceService.convetToMenus(resources);
 //        Map<String, List<Menu>> map = new HashMap<String, List<Menu>>();
-//        map.put("sidenav", menus);
-    	return new ModelAndView("index/index_", new HashMap<String, List<Menu>>());
+//        map.put("sidenav", menus);/manufacturer/index
+        Subject subject = SecurityUtils.getSubject();
+        User o = (User)subject.getPrincipal();
+        if("101702".equals(o.getChannel())) {
+            return new ModelAndView("redirect:/manufacturer/index", new HashMap<String, List<Menu>>());
+        } else {
+            return new ModelAndView("index/index_", new HashMap<String, List<Menu>>());
+        }
     }
 
     @RequestMapping(value = "welcome", method = RequestMethod.GET)

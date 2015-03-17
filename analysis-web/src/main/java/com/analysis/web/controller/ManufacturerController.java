@@ -12,20 +12,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.analysis.web.bean.ManufacturerActive;
+import com.analysis.web.bean.Manufacturer;
 import com.analysis.web.bean.User;
-import com.analysis.web.service.ManufacturerActiveService;
+import com.analysis.web.service.ManufacturerService;
 import com.analysis.web.ui.Menu;
 
 @Controller()
-@RequestMapping(value = "/manuActiveStat")
-public class ManufacturerActiveController extends AbstractController {
+@RequestMapping(value = "/manufacturer")
+public class ManufacturerController extends AbstractController {
 
-    @Autowired private ManufacturerActiveService manufacturerActiveService;
+    @Autowired private ManufacturerService manufacturerService;
 
     @RequestMapping(value = "/index", method = RequestMethod.GET)
     public ModelAndView index() {
-        return new ModelAndView("manuActiveStat/manuActiveStat", new HashMap<String, List<Menu>>());
+        return new ModelAndView("manufacturer/manufacturer", new HashMap<String, List<Menu>>());
     }
     
     @RequestMapping(value = "/getByChannel.json", method = RequestMethod.POST)
@@ -34,17 +34,21 @@ public class ManufacturerActiveController extends AbstractController {
     	
     	Subject subject = SecurityUtils.getSubject();
     	User o = (User)subject.getPrincipal();
-        List<ManufacturerActive> list = manufacturerActiveService.findByChannel(o.getChannel());
-        List<Object[]> resultList = new ArrayList<Object[]>();
+        List<Manufacturer> list = manufacturerService.findByChannel(o.getChannel());
+
+        List<String> cdates = new ArrayList<String>();
+        List<Long> regnum = new ArrayList<Long>();
+        List<Long> activenum = new ArrayList<Long>();
         
-        for (ManufacturerActive manufacturerActive : list) {
-        	Object[] oarr = new Object[2];
-        	oarr[0] = manufacturerActive.getYyyymm();
-        	oarr[1] = manufacturerActive.getMnum();
-        	resultList.add(oarr);
+        for (Manufacturer manufacturer : list) {
+            cdates.add(manufacturer.getCdate());
+            regnum.add(manufacturer.getRegnum());
+            activenum.add(manufacturer.getActivenum());
 		}
-        
-    	modelAndView.addObject("list", resultList);
+
+        modelAndView.addObject("cdate", cdates);
+    	modelAndView.addObject("regnum", regnum);
+        modelAndView.addObject("activenum", activenum);
         return modelAndView;
     }
 

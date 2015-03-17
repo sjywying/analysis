@@ -10,5 +10,8 @@ public interface RegisterMapper {
 	
 	@InsertProvider(type=RegisterProvider.class, method="insert")
 	void insert(Register registe);
+
+//	@InsertProvider(type=RegisterProvider.class, method="selectByChannel")
+//	long selectByChannel(String channel, String cdate);
     
 }

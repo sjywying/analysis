@@ -1,1 +1,0 @@
-INSERT INTO biz_active (yyyymm, channel, model, num) select '201412', channel, model, count(1) from biz_register_201412 GROUP BY channel, model

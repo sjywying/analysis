@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.analysis.web.mapper.ManufacturerMapper">
+  <resultMap id="Manufacturer" type="com.analysis.web.bean.Manufacturer">
+    <result column="cdate" jdbcType="VARCHAR" property="cdate" />
+    <result column="channel" jdbcType="VARCHAR" property="channel" />
+    <result column="regnum" jdbcType="INTEGER" property="regnum" />
+    <result column="activenum" jdbcType="INTEGER" property="activenum" />
+  </resultMap>
+  
+</mapper>
