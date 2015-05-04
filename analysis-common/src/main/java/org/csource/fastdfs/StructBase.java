@@ -43,7 +43,7 @@ public abstract class StructBase
 	{
 		try
 		{
-			return (new String(bs, offset + filedInfo.offset, filedInfo.size, ClientGlobal.g_charset)).trim();
+			return (new String(bs, offset + filedInfo.offset, filedInfo.size, ClientGlobal.charset)).trim();
 		}
 		catch(UnsupportedEncodingException ex)
 		{
@@ -62,11 +62,6 @@ public abstract class StructBase
 		return (int)ProtoCommon.buff2long(bs, offset + filedInfo.offset);
 	}
 	
-	protected int int32Value(byte[] bs, int offset, FieldInfo filedInfo)
-	{
-		return ProtoCommon.buff2int(bs, offset + filedInfo.offset);
-	}
-
 	protected byte byteValue(byte[] bs, int offset, FieldInfo filedInfo)
 	{
 		return bs[offset + filedInfo.offset];

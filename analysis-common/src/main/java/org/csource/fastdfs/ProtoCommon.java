@@ -478,9 +478,9 @@ public class ProtoCommon
 */
  public static String getToken(String remote_filename, int ts, String secret_key) throws UnsupportedEncodingException, NoSuchAlgorithmException, MyException
  {
- 	byte[] bsFilename = remote_filename.getBytes(ClientGlobal.g_charset);
- 	byte[] bsKey = secret_key.getBytes(ClientGlobal.g_charset);
- 	byte[] bsTimestamp = (new Integer(ts)).toString().getBytes(ClientGlobal.g_charset);
+ 	byte[] bsFilename = remote_filename.getBytes(ClientGlobal.charset);
+ 	byte[] bsKey = secret_key.getBytes(ClientGlobal.charset);
+ 	byte[] bsTimestamp = (new Integer(ts)).toString().getBytes(ClientGlobal.charset);
  	
  	byte[] buff = new byte[bsFilename.length + bsKey.length + bsTimestamp.length];
  	System.arraycopy(bsFilename, 0, buff, 0, bsFilename.length);

@@ -13,7 +13,7 @@ import java.util.Date;
 /**
 * C struct body decoder
 * @author Happy Fish / YuQing
-* @version Version 1.25
+* @version Version 1.20
 */
 public class StructStorageStat extends StructBase
 {
@@ -33,57 +33,52 @@ public class StructStorageStat extends StructBase
 	protected static final int FIELD_INDEX_CURRENT_WRITE_PATH       = 13;
 	protected static final int FIELD_INDEX_STORAGE_PORT             = 14;
 	protected static final int FIELD_INDEX_STORAGE_HTTP_PORT        = 15;
-
-	protected static final int FIELD_INDEX_CONNECTION_ALLOC_COUNT   = 16;
-	protected static final int FIELD_INDEX_CONNECTION_CURRENT_COUNT = 17;
-	protected static final int FIELD_INDEX_CONNECTION_MAX_COUNT     = 18;
-
-	protected static final int FIELD_INDEX_TOTAL_UPLOAD_COUNT       = 19;
-	protected static final int FIELD_INDEX_SUCCESS_UPLOAD_COUNT     = 20;
-	protected static final int FIELD_INDEX_TOTAL_APPEND_COUNT       = 21;
-	protected static final int FIELD_INDEX_SUCCESS_APPEND_COUNT     = 22;
-	protected static final int FIELD_INDEX_TOTAL_MODIFY_COUNT       = 23;
-	protected static final int FIELD_INDEX_SUCCESS_MODIFY_COUNT     = 24;
-	protected static final int FIELD_INDEX_TOTAL_TRUNCATE_COUNT     = 25;
-	protected static final int FIELD_INDEX_SUCCESS_TRUNCATE_COUNT   = 26;
-	protected static final int FIELD_INDEX_TOTAL_SET_META_COUNT     = 27;
-	protected static final int FIELD_INDEX_SUCCESS_SET_META_COUNT   = 28;
-	protected static final int FIELD_INDEX_TOTAL_DELETE_COUNT       = 29;
-	protected static final int FIELD_INDEX_SUCCESS_DELETE_COUNT     = 30;
-	protected static final int FIELD_INDEX_TOTAL_DOWNLOAD_COUNT     = 31;
-	protected static final int FIELD_INDEX_SUCCESS_DOWNLOAD_COUNT   = 32;
-	protected static final int FIELD_INDEX_TOTAL_GET_META_COUNT     = 33;
-	protected static final int FIELD_INDEX_SUCCESS_GET_META_COUNT   = 34;
-	protected static final int FIELD_INDEX_TOTAL_CREATE_LINK_COUNT  = 35;
-	protected static final int FIELD_INDEX_SUCCESS_CREATE_LINK_COUNT= 36;
-	protected static final int FIELD_INDEX_TOTAL_DELETE_LINK_COUNT  = 37;
-	protected static final int FIELD_INDEX_SUCCESS_DELETE_LINK_COUNT= 38;
-	protected static final int FIELD_INDEX_TOTAL_UPLOAD_BYTES       = 39;
-	protected static final int FIELD_INDEX_SUCCESS_UPLOAD_BYTES     = 40;
-	protected static final int FIELD_INDEX_TOTAL_APPEND_BYTES       = 41;
-	protected static final int FIELD_INDEX_SUCCESS_APPEND_BYTES     = 42;
-	protected static final int FIELD_INDEX_TOTAL_MODIFY_BYTES       = 43;
-	protected static final int FIELD_INDEX_SUCCESS_MODIFY_BYTES     = 44;
-	protected static final int FIELD_INDEX_TOTAL_DOWNLOAD_BYTES     = 45;
-	protected static final int FIELD_INDEX_SUCCESS_DOWNLOAD_BYTES   = 46;
-	protected static final int FIELD_INDEX_TOTAL_SYNC_IN_BYTES      = 47;
-	protected static final int FIELD_INDEX_SUCCESS_SYNC_IN_BYTES    = 48;
-	protected static final int FIELD_INDEX_TOTAL_SYNC_OUT_BYTES     = 49;
-	protected static final int FIELD_INDEX_SUCCESS_SYNC_OUT_BYTES   = 50;
-	protected static final int FIELD_INDEX_TOTAL_FILE_OPEN_COUNT    = 51;
-	protected static final int FIELD_INDEX_SUCCESS_FILE_OPEN_COUNT  = 52;
-	protected static final int FIELD_INDEX_TOTAL_FILE_READ_COUNT    = 53;
-	protected static final int FIELD_INDEX_SUCCESS_FILE_READ_COUNT  = 54;
-	protected static final int FIELD_INDEX_TOTAL_FILE_WRITE_COUNT   = 55;
-	protected static final int FIELD_INDEX_SUCCESS_FILE_WRITE_COUNT = 56;
-	protected static final int FIELD_INDEX_LAST_SOURCE_UPDATE       = 57;
-	protected static final int FIELD_INDEX_LAST_SYNC_UPDATE         = 58;
-	protected static final int FIELD_INDEX_LAST_SYNCED_TIMESTAMP    = 59;
-	protected static final int FIELD_INDEX_LAST_HEART_BEAT_TIME     = 60;
-	protected static final int FIELD_INDEX_IF_TRUNK_FILE            = 61;
+	protected static final int FIELD_INDEX_TOTAL_UPLOAD_COUNT       = 16;
+	protected static final int FIELD_INDEX_SUCCESS_UPLOAD_COUNT     = 17;
+	protected static final int FIELD_INDEX_TOTAL_APPEND_COUNT       = 18;
+	protected static final int FIELD_INDEX_SUCCESS_APPEND_COUNT     = 19;
+	protected static final int FIELD_INDEX_TOTAL_MODIFY_COUNT       = 20;
+	protected static final int FIELD_INDEX_SUCCESS_MODIFY_COUNT     = 21;
+	protected static final int FIELD_INDEX_TOTAL_TRUNCATE_COUNT     = 22;
+	protected static final int FIELD_INDEX_SUCCESS_TRUNCATE_COUNT   = 23;
+	protected static final int FIELD_INDEX_TOTAL_SET_META_COUNT     = 24;
+	protected static final int FIELD_INDEX_SUCCESS_SET_META_COUNT   = 25;
+	protected static final int FIELD_INDEX_TOTAL_DELETE_COUNT       = 26;
+	protected static final int FIELD_INDEX_SUCCESS_DELETE_COUNT     = 27;
+	protected static final int FIELD_INDEX_TOTAL_DOWNLOAD_COUNT     = 28;
+	protected static final int FIELD_INDEX_SUCCESS_DOWNLOAD_COUNT   = 29;
+	protected static final int FIELD_INDEX_TOTAL_GET_META_COUNT     = 30;
+	protected static final int FIELD_INDEX_SUCCESS_GET_META_COUNT   = 31;
+	protected static final int FIELD_INDEX_TOTAL_CREATE_LINK_COUNT  = 32;
+	protected static final int FIELD_INDEX_SUCCESS_CREATE_LINK_COUNT= 33;
+	protected static final int FIELD_INDEX_TOTAL_DELETE_LINK_COUNT  = 34;
+	protected static final int FIELD_INDEX_SUCCESS_DELETE_LINK_COUNT= 35;	
+	protected static final int FIELD_INDEX_TOTAL_UPLOAD_BYTES       = 36;
+	protected static final int FIELD_INDEX_SUCCESS_UPLOAD_BYTES     = 37;
+	protected static final int FIELD_INDEX_TOTAL_APPEND_BYTES       = 38;
+	protected static final int FIELD_INDEX_SUCCESS_APPEND_BYTES     = 39;
+	protected static final int FIELD_INDEX_TOTAL_MODIFY_BYTES       = 40;
+	protected static final int FIELD_INDEX_SUCCESS_MODIFY_BYTES     = 41;
+	protected static final int FIELD_INDEX_TOTAL_DOWNLOAD_BYTES     = 42;
+	protected static final int FIELD_INDEX_SUCCESS_DOWNLOAD_BYTES   = 43;
+	protected static final int FIELD_INDEX_TOTAL_SYNC_IN_BYTES      = 44;
+	protected static final int FIELD_INDEX_SUCCESS_SYNC_IN_BYTES    = 45;
+	protected static final int FIELD_INDEX_TOTAL_SYNC_OUT_BYTES     = 46;
+	protected static final int FIELD_INDEX_SUCCESS_SYNC_OUT_BYTES   = 47;
+	protected static final int FIELD_INDEX_TOTAL_FILE_OPEN_COUNT    = 48;
+	protected static final int FIELD_INDEX_SUCCESS_FILE_OPEN_COUNT  = 49;
+	protected static final int FIELD_INDEX_TOTAL_FILE_READ_COUNT    = 50;
+	protected static final int FIELD_INDEX_SUCCESS_FILE_READ_COUNT  = 51;
+	protected static final int FIELD_INDEX_TOTAL_FILE_WRITE_COUNT   = 52;
+	protected static final int FIELD_INDEX_SUCCESS_FILE_WRITE_COUNT = 53;
+	protected static final int FIELD_INDEX_LAST_SOURCE_UPDATE       = 54;
+	protected static final int FIELD_INDEX_LAST_SYNC_UPDATE         = 55;
+	protected static final int FIELD_INDEX_LAST_SYNCED_TIMESTAMP    = 56;
+	protected static final int FIELD_INDEX_LAST_HEART_BEAT_TIME     = 57;
+	protected static final int FIELD_INDEX_IF_TRUNK_FILE            = 58;
 	
 	protected static int fieldsTotalSize;
-	protected static FieldInfo[] fieldsArray = new FieldInfo[62];
+	protected static FieldInfo[] fieldsArray = new FieldInfo[59];
 	
 	static
 	{
@@ -133,19 +128,10 @@ public class StructStorageStat extends StructBase
 
 		fieldsArray[FIELD_INDEX_STORAGE_PORT] = new FieldInfo("storagePort", offset, ProtoCommon.FDFS_PROTO_PKG_LEN_SIZE);
 		offset += ProtoCommon.FDFS_PROTO_PKG_LEN_SIZE;
-
+		
 		fieldsArray[FIELD_INDEX_STORAGE_HTTP_PORT] = new FieldInfo("storageHttpPort", offset, ProtoCommon.FDFS_PROTO_PKG_LEN_SIZE);
 		offset += ProtoCommon.FDFS_PROTO_PKG_LEN_SIZE;
-
-		fieldsArray[FIELD_INDEX_CONNECTION_ALLOC_COUNT] = new FieldInfo("connectionAllocCount", offset, 4);
-		offset += 4;
-
-		fieldsArray[FIELD_INDEX_CONNECTION_CURRENT_COUNT] = new FieldInfo("connectionCurrentCount", offset, 4);
-		offset += 4;
-
-		fieldsArray[FIELD_INDEX_CONNECTION_MAX_COUNT] = new FieldInfo("connectionMaxCount", offset, 4);
-		offset += 4;
-
+				
 		fieldsArray[FIELD_INDEX_TOTAL_UPLOAD_COUNT] = new FieldInfo("totalUploadCount", offset, ProtoCommon.FDFS_PROTO_PKG_LEN_SIZE);
 		offset += ProtoCommon.FDFS_PROTO_PKG_LEN_SIZE;
 				
@@ -294,9 +280,6 @@ public class StructStorageStat extends StructBase
 	protected int storagePort;
 	protected int storageHttpPort; //storage http server port
 	protected int currentWritePath; //current write path index
-	protected int connectionAllocCount;
-	protected int connectionCurrentCount;
-	protected int connectionMaxCount;
 	protected long totalUploadCount;
 	protected long successUploadCount;
 	protected long totalAppendCount;
@@ -339,7 +322,7 @@ public class StructStorageStat extends StructBase
 	protected Date lastSyncUpdate;
 	protected Date lastSyncedTimestamp;
 	protected Date lastHeartBeatTime;
-	protected boolean ifTrunkServer;
+  protected boolean ifTrunkServer;
   
 /**
 * get storage status
@@ -873,33 +856,6 @@ public class StructStorageStat extends StructBase
   }
   
 /**
-* get connection alloc count
-* @return connection alloc count
-*/
-  public int getConnectionAllocCount()
-  {
-  	return this.connectionAllocCount;
-  }
-
-/**
-* get connection current count
-* @return connection current count
-*/
-  public int getConnectionCurrentCount()
-  {
-  	return this.connectionCurrentCount;
-  }
-
-/**
-* get connection max count
-* @return connection max count
-*/
-  public int getConnectionMaxCount()
-  {
-  	return this.connectionMaxCount;
-  }
-
-/**
 * set fields
 * @param bs byte array
 * @param offset start offset
@@ -917,16 +873,11 @@ public class StructStorageStat extends StructBase
 		this.uploadPriority = intValue(bs, offset, fieldsArray[FIELD_INDEX_UPLOAD_PRIORITY]);
 		this.joinTime = dateValue(bs, offset, fieldsArray[FIELD_INDEX_JOIN_TIME]);
 		this.upTime = dateValue(bs, offset, fieldsArray[FIELD_INDEX_UP_TIME]);
-		this.storePathCount = intValue(bs, offset, fieldsArray[FIELD_INDEX_STORE_PATH_COUNT]);
-		this.subdirCountPerPath = intValue(bs, offset, fieldsArray[FIELD_INDEX_SUBDIR_COUNT_PER_PATH]);
-		this.storagePort = intValue(bs, offset, fieldsArray[FIELD_INDEX_STORAGE_PORT]);
-		this.storageHttpPort = intValue(bs, offset, fieldsArray[FIELD_INDEX_STORAGE_HTTP_PORT]);
-		this.currentWritePath = intValue(bs, offset, fieldsArray[FIELD_INDEX_CURRENT_WRITE_PATH]);
-
-		this.connectionAllocCount = int32Value(bs, offset, fieldsArray[FIELD_INDEX_CONNECTION_ALLOC_COUNT]);
-		this.connectionCurrentCount = int32Value(bs, offset, fieldsArray[FIELD_INDEX_CONNECTION_CURRENT_COUNT]);
-		this.connectionMaxCount = int32Value(bs, offset, fieldsArray[FIELD_INDEX_CONNECTION_MAX_COUNT]);
-
+	  this.storePathCount = intValue(bs, offset, fieldsArray[FIELD_INDEX_STORE_PATH_COUNT]);
+	  this.subdirCountPerPath = intValue(bs, offset, fieldsArray[FIELD_INDEX_SUBDIR_COUNT_PER_PATH]);
+	  this.storagePort = intValue(bs, offset, fieldsArray[FIELD_INDEX_STORAGE_PORT]);
+	  this.storageHttpPort = intValue(bs, offset, fieldsArray[FIELD_INDEX_STORAGE_HTTP_PORT]);
+	  this.currentWritePath = intValue(bs, offset, fieldsArray[FIELD_INDEX_CURRENT_WRITE_PATH]);
 		this.totalUploadCount = longValue(bs, offset, fieldsArray[FIELD_INDEX_TOTAL_UPLOAD_COUNT]);
 		this.successUploadCount = longValue(bs, offset, fieldsArray[FIELD_INDEX_SUCCESS_UPLOAD_COUNT]);
 		this.totalAppendCount = longValue(bs, offset, fieldsArray[FIELD_INDEX_TOTAL_APPEND_COUNT]);
