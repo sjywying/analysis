@@ -1,12 +1,5 @@
-/** Copyright (C) 2012 Happy Fish / YuQing
- *  My FastDFS Java Client may be copied only under the terms of the GNU Lesser
- * General Public License (LGPL). 
- * Please visit the FastDFS Home Page http://www.csource.org/ for more detail.
- */
+package org.csource.common;
 
-package org.csource;
-
-import org.csource.common.MyException;
 import org.csource.fastdfs.DownloadCallback;
 import org.csource.fastdfs.FileInfo;
 import org.csource.fastdfs.newClient;
@@ -37,11 +30,11 @@ public class DFSCustomIdClient {
          * @param fdhtNamespace
          *                the FastDHT namespace
          */
-        public DFSCustomIdClient(String fdhtNamespace) throws MyException {
+        public DFSCustomIdClient(String fdhtNamespace) throws FastDFSException {
                 this.newClient = new newClient();
                 this.fdhtClient = new FastDHTClient(true);
                 if (fdhtNamespace == null || fdhtNamespace.length() == 0) {
-                        throw new MyException("FastDHT 的namespace必须设置t!");
+                        throw new FastDFSException("FastDHT 的namespace必须设置t!");
                 }
                 this.fdhtNamespace = fdhtNamespace;
         }
@@ -59,11 +52,11 @@ public class DFSCustomIdClient {
          *                the FastDHT namespace
          */
         public DFSCustomIdClient(TrackerServer trackerServer, StorageServer storageServer, ServerGroup serverGroup,
-                        String fdhtNamespace) throws MyException {
+                        String fdhtNamespace) throws FastDFSException {
                 this.newClient = new newClient(trackerServer, storageServer);
                 this.fdhtClient = new FastDHTClient(serverGroup);
                 if (fdhtNamespace == null || fdhtNamespace.length() == 0) {
-                        throw new MyException("FastDHT namespace must be set!");
+                        throw new FastDFSException("FastDHT namespace must be set!");
                 }
                 this.fdhtNamespace = fdhtNamespace;
         }
@@ -78,8 +71,8 @@ public class DFSCustomIdClient {
          * @throws Exception
          */
         public static void init(String fdfsConfigFilename, String fdhtConfigFilename) throws Exception {
-                org.csource.fastdfs.ClientGlobal.init(fdfsConfigFilename);
-                org.csource.fastdht.ClientGlobal.init(fdhtConfigFilename);
+                org.csource.fastdfs.ClientGlobal.init(new Configuration(fdfsConfigFilename));
+                org.csource.fastdht.ClientGlobal.init(new Configuration(fdhtConfigFilename));
         }
 
         /**
@@ -110,7 +103,7 @@ public class DFSCustomIdClient {
                 this.status = this.fdhtClient.getErrorCode();
                 if (fdfs_file_id != null || this.status == 0) {
                         this.status = 17; // EEXIST
-                        throw new MyException("file id: "
+                        throw new FastDFSException("file id: "
                                         + new String(keyInfo.getObjectId(), org.csource.fastdht.ClientGlobal.charset)
                                         + " already exist");
                 }

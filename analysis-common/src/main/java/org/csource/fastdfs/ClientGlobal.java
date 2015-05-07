@@ -13,8 +13,8 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 
-import org.csource.common.IniFileReader;
-import org.csource.common.MyException;
+import com.analysis.common.config.ImmutableConfiguration;
+import org.csource.common.FastDFSException;
 
 /**
  * Global variables
@@ -39,44 +39,43 @@ public class ClientGlobal {
 
         /**
          * load global variables
-         * 
-         * @param conf_filename
-         *                config filename
+         *
+         * @param config
+         * @throws FileNotFoundException
+         * @throws IOException
+         * @throws org.csource.common.FastDFSException
          */
-        public static void init(String conf_filename) throws FileNotFoundException, IOException, MyException {
-                IniFileReader iniReader;
+        public static void init(ImmutableConfiguration config) throws FileNotFoundException, IOException, FastDFSException {
                 String[] szTrackerServers;
                 String[] parts;
 
-                iniReader = new IniFileReader(conf_filename);
-
-                connectTimeout = iniReader.getIntValue("connect_timeout", DEFAULT_CONNECT_TIMEOUT);
+                connectTimeout = config.getInt("connect_timeout", DEFAULT_CONNECT_TIMEOUT);
                 if (connectTimeout < 0) {
                         connectTimeout = DEFAULT_CONNECT_TIMEOUT;
                 }
                 connectTimeout *= 1000; // millisecond
 
-                networkTimeout = iniReader.getIntValue("network_timeout", DEFAULT_NETWORK_TIMEOUT);
+                networkTimeout = config.getInt("network_timeout", DEFAULT_NETWORK_TIMEOUT);
                 if (networkTimeout < 0) {
                         networkTimeout = DEFAULT_NETWORK_TIMEOUT;
                 }
                 networkTimeout *= 1000; // millisecond
 
-                charset = iniReader.getStrValue("charset");
+                charset = config.getString("charset");
                 if (charset == null || charset.length() == 0) {
                         charset = "UTF-8";
                 }
 
-                szTrackerServers = iniReader.getValues("tracker_server");
+                szTrackerServers = config.getStringArray("tracker_server");
                 if (szTrackerServers == null) {
-                        throw new MyException("item \"tracker_server\" in " + conf_filename + " not found");
+                        throw new FastDFSException("item \"tracker_server\" not found");
                 }
 
                 InetSocketAddress[] tracker_servers = new InetSocketAddress[szTrackerServers.length];
                 for (int i = 0; i < szTrackerServers.length; i++) {
                         parts = szTrackerServers[i].split("\\:", 2);
                         if (parts.length != 2) {
-                                throw new MyException(
+                                throw new FastDFSException(
                                                 "the value of item \"tracker_server\" is invalid, the correct format is host:port");
                         }
 
@@ -84,10 +83,10 @@ public class ClientGlobal {
                 }
                 trackerGroup = new TrackerGroup(tracker_servers);
 
-                trackerHttpPort = iniReader.getIntValue("http.tracker_http_port", 80);
-                antiStealToken = iniReader.getBoolValue("http.anti_steal_token", false);
+                trackerHttpPort = config.getInt("http.tracker_http_port", 80);
+                antiStealToken = config.getBoolean("http.anti_steal_token", false);
                 if (antiStealToken) {
-                        secretKey = iniReader.getStrValue("http.secret_key");
+                        secretKey = config.getString("http.secret_key");
                 }
         }
 

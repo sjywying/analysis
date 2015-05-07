@@ -8,10 +8,10 @@
 
 package org.csource.fastdht;
 
+import com.analysis.common.config.ImmutableConfiguration;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
-
-import org.csource.common.IniFileReader;
 
 /**
  * Global variables
@@ -28,26 +28,21 @@ public class ClientGlobal {
         /**
          * load global variables
          * 
-         * @param conf_filename
-         *                config filename
+         * @param config config filename
          */
-        public static void init(String conf_filename) throws FileNotFoundException, IOException, Exception {
-                IniFileReader iniReader;
-
-                iniReader = new IniFileReader(conf_filename);
-
-                networkTimeout = iniReader.getIntValue("network_timeout", DEFAULT_NETWORK_TIMEOUT);
+        public static void init(ImmutableConfiguration config) throws FileNotFoundException, IOException, Exception {
+                networkTimeout = config.getInt("network_timeout", DEFAULT_NETWORK_TIMEOUT);
                 if (networkTimeout < 0) {
                         networkTimeout = DEFAULT_NETWORK_TIMEOUT;
                 }
                 networkTimeout *= 1000; // millisecond
 
-                charset = iniReader.getStrValue("charset");
+                charset = config.getString("charset");
                 if (charset == null || charset.length() == 0) {
                         charset = "UTF-8";
                 }
 
-                serverGroup = ServerGroup.loadFromFile(iniReader);
+                serverGroup = ServerGroup.loadFromFile(config);
         }
 
         private ClientGlobal() {

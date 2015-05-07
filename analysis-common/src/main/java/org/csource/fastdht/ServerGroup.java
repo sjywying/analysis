@@ -8,11 +8,10 @@
 
 package org.csource.fastdht;
 
+import com.analysis.common.config.ImmutableConfiguration;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.Socket;
-
-import org.csource.common.IniFileReader;
 
 /**
  * Global variables
@@ -110,11 +109,11 @@ public class ServerGroup {
         /**
          * load group info from config file
          * 
-         * @param iniReader
+         * @param config
          *                config filename reader
          * @return group info
          */
-        public static ServerGroup loadFromFile(IniFileReader iniReader) throws Exception {
+        public static ServerGroup loadFromFile(ImmutableConfiguration config) throws Exception {
                 ServerGroup serverGroup;
                 ServerInfo serverInfo;
                 ServerInfo[] servers;
@@ -126,10 +125,10 @@ public class ServerGroup {
                 String[] parts;
 
                 serverGroup = new ServerGroup();
-                keep_alive = iniReader.getIntValue("keep_alive", 0);
+                keep_alive = config.getInt("keep_alive", 0);
                 serverGroup.keep_alive = keep_alive != 0;
 
-                group_count = iniReader.getIntValue("group_count", 0);
+                group_count = config.getInt("group_count", 0);
                 if (group_count <= 0) {
                         throw new Exception("Invalid group_count: " + group_count);
                 }
@@ -137,10 +136,9 @@ public class ServerGroup {
                 serverGroup.groups = new ServerInfo[group_count][];
                 serverGroup.servers = new ServerInfo[0];
                 for (int i = 0; i < group_count; i++) {
-                        szServers = iniReader.getValues("group" + i);
+                        szServers = config.getStringArray("group" + i);
                         if (szServers == null || szServers.length == 0) {
-                                throw new Exception("item \"group" + i + "\" in " + iniReader.getConfFilename()
-                                                + " not found");
+                                throw new Exception("item \"group" + i + "\" not found");
                         }
 
                         serverGroup.groups[i] = new ServerInfo[0];
