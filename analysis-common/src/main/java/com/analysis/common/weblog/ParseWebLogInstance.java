@@ -22,8 +22,8 @@ public class ParseWebLogInstance {
     private static final Logger logger = LoggerFactory.getLogger(ParseWebLogInstance.class);
     private static final String CONFIG_PROPERTIES_FILE = "config.properties";
     private static final String PROPERTIES_KEY_LOG_FORMAT = "log-format";
-//    private static final String PROPERTIES_KEY_LOG_FORMAT_DEFAULT_VALUE = "$remote_addr - $remote_user [$time_local] \"$request\" \"$http_referer\" $status $body_bytes_sent $request_body \"$http_user_agent\" \"$http_x_forwarded_for\"";
-    private static final String PROPERTIES_KEY_LOG_FORMAT_DEFAULT_VALUE = "$remote_addr - $remote_user [$time_local] \"$request\" $status $body_bytes_sent \"$http_referer\" \"$http_user_agent\" \"$http_x_forwarded_for\"";
+    private static final String PROPERTIES_KEY_LOG_FORMAT_DEFAULT_VALUE = "$remote_addr - $remote_user [$time_local] \"$request\" \"$http_referer\" $status $body_bytes_sent $request_body \"$http_user_agent\" \"$http_x_forwarded_for\"";
+//    private static final String PROPERTIES_KEY_LOG_FORMAT_DEFAULT_VALUE = "$remote_addr - $remote_user [$time_local] \"$request\" $status $body_bytes_sent \"$http_referer\" \"$http_user_agent\" \"$http_x_forwarded_for\"";
 
 
     private static final Set<Character> charactersToEscape = new HashSet<Character>() {
@@ -58,7 +58,7 @@ public class ParseWebLogInstance {
 
 
     private ParseWebLogInstance() {
-        initConfig();
+//        initConfig();
         this.metaPattern = prop.getProperty(PROPERTIES_KEY_LOG_FORMAT, PROPERTIES_KEY_LOG_FORMAT_DEFAULT_VALUE);
     }
 
@@ -118,9 +118,16 @@ public class ParseWebLogInstance {
         return logBean;
     }
 
-
+//    private static class ParseWebLogInstanceHolder {
+//        private static final ParseWebLogInstance INSTANCE = new ParseWebLogInstance();
+//    }
+    private static ParseWebLogInstance INSTANCE;
     public static final ParseWebLogInstance getInstance() {
-        return ParseWebLogInstanceHolder.INSTANCE;
+
+        if(INSTANCE == null) {
+            INSTANCE = new ParseWebLogInstance();
+        }
+        return INSTANCE;
     }
 
     private void initConfig() {
@@ -133,22 +140,4 @@ public class ParseWebLogInstance {
             logger.error("Unable to load config.properties: {}", ex);
         }
     }
-
-
-    private static class ParseWebLogInstanceHolder {
-
-        private static final ParseWebLogInstance INSTANCE = new ParseWebLogInstance();
-
-    }
-
-    public static void main(String[] args) {
-        LogBean map = ParseWebLogInstance.getInstance().parseLog("0.0.0.1 - - [26/Feb/2015:00:00:00 +0800] \"POST /ishow//config/ HTTP/1.1\" \"-\" 200 45 {\\x22adccompany\\x22:\\x22101702\\x22,\\x22wd\\x22:\\x22%E9%98%B3%E6%98%A5%E5%B8%82%E7%AC%AC%E5%9B%9B%E4%B8%AD%E5%AD%A6\\x22,\\x22an\\x22:\\x22w-Android-gen-720x1280\\x22,\\x22av\\x22:\\x22APKPRJ112_1.0.0.15_20141231\\x22,\\x22cityid\\x22:\\x22513200\\x22,\\x22configMap\\x22:{\\x221\\x22:\\x221420793291000\\x22},\\x22imei\\x22:\\x22865914020664765\\x22,\\x22imsi\\x22:\\x22999030767168043\\x22,\\x22isSale\\x22:\\x220\\x22,\\x22model\\x22:\\x22UIMI4\\x22,\\x22pkgname\\x22:\\x22com.ishow.client.android.plugin.company\\x22,\\x22tid\\x22:\\x22e865914020664765\\x22} \"Dalvik/1.6.0 (Linux; U; Android 4.4.2; UIMI4 Build/KOT49H)\" \"-\"");
-        System.out.println(map.buildString());
-        System.out.println(map.toString());
-
-        LogBean map1 = ParseWebLogInstance.getInstance().parseLog("211.140.5.112 - - [23/Mar/2015:00:03:18 +0800] \"GET /redirect/?serviceId=32&tid=e864029021545383&model=DOMI&adccompany=101702&av=APKPRJ112_1.0.0.14_20141209&pkgname=com.ishow.client.android.plugin.company&imsi=460008842507599&imei=864029021545383&an=w-Android-gen-540x960&cityId=330300&lat=27.997988&lng=120.679247&wd=%E9%98%B3%E6%98%A5%E5%B8%82%E7%AC%AC%E5%9B%9B%E4%B8%AD%E5%AD%A6 HTTP/1.1\" \"-\" 302 0 - \"Mozilla/5.0 (Linux; Android 4.4.2; DOMI Build/KOT49H) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/30.0.0.0 Mobile Safari/537.36\" \"-\"");
-        System.out.println(map1.buildString());
-        System.out.println(map1.toString());
-    }
-
 }

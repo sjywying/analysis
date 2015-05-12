@@ -216,4 +216,16 @@ public class LogBean {
     public Integer getStatus() {
         return status;
     }
+
+    public String getAv() {
+        return av;
+    }
+
+    public String getCcode() {
+        return ccode;
+    }
+
+    public String getCtime() {
+        return time_local;
+    }
 }

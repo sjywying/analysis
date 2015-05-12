@@ -27,5 +27,4 @@ public class RequestBodyFieldParser extends MultipleResultFieldParser {
 
         return fields;
     }
-    
 }
