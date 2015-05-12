@@ -1,5 +1,6 @@
 package org.csource.common;
 
+import com.analysis.common.config.ImmutableConfiguration;
 import org.csource.fastdfs.DownloadCallback;
 import org.csource.fastdfs.FileInfo;
 import org.csource.fastdfs.newClient;
@@ -66,6 +67,11 @@ public class DFSCustomIdClient {
     public static void init(String fdfsConfigFilename, String fdhtConfigFilename) throws Exception {
         org.csource.fastdfs.ClientGlobal.init(new Configuration(fdfsConfigFilename));
         org.csource.fastdht.ClientGlobal.init(new Configuration(fdhtConfigFilename));
+    }
+
+    public static void init(ImmutableConfiguration fdfsConfig, ImmutableConfiguration fdhtConfig) throws Exception {
+        org.csource.fastdfs.ClientGlobal.init(fdfsConfig);
+        org.csource.fastdht.ClientGlobal.init(fdhtConfig);
     }
 
     /**
