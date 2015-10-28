@@ -17,11 +17,6 @@
 	</properties>
 
 	<dependencies>
-		<dependency>
-			<groupId>com.analysis</groupId>
-			<artifactId>analysis-common</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
 
 		<!-- Spring 开始 -->
 		<dependency>

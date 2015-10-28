@@ -1,10 +1,6 @@
 package com.analysis.common.utils;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -37,11 +33,18 @@ public class ChunZhenIPMetadataParser {
 	
 //	TODO 解析文件出错，异常退出。
 	private static synchronized void parser() {
+		File outFile = new File(ChunZhenIPMetadataParser.class.getResource("/").getPath() + "ip_out.txt");
+		FileWriter fileWriter = null;
+		BufferedWriter bufferedWriter = null;
+
 		File file = null;
 		FileReader fileReader = null;
 		BufferedReader br = null;
 		try {
-			file = new File(ChunZhenIPMetadataParser.class.getResource("/").getPath() + "cunzhen_ip.data");
+			fileWriter = new FileWriter(outFile);
+			bufferedWriter = new BufferedWriter(fileWriter);
+
+			file = new File(ChunZhenIPMetadataParser.class.getResource("/").getPath() + "ip.log");
 			if(!file.exists()) {
 				logger.error("file is not found: cunzhen_ip.data.");
 //				System.exit(0);
@@ -65,26 +68,45 @@ public class ChunZhenIPMetadataParser {
 						i++;
 					}
 					
-					if(i == 3) break;
+					if(i == 4) break;
 				}
 				
 				if(iparr != null && iparr.length == 4) {
-					long iplongstar = ipToLong(iparr[0]);
-					long iplongend	= ipToLong(iparr[1]);
-					
-					if(iplongstar != endindex) {
-						logger.error("file cunzhen_ip.data is illegal, ip not is not continuous. ip:{}", line);
-						break;
+					String province = "";
+					int provinceindex = iparr[2].indexOf("省");
+					if(provinceindex != -1) {
+						province = iparr[2].substring(0, provinceindex);
 					}
-					
-					endindex = iplongend+1;
-					
-//					int shengindex = iparr[2].indexOf("省");
-//					if(shengindex != -1) {
-//						ipcountry.put(iplongstar, iparr[2].substring(0, shengindex));
-//					} else {
-						ipcountry.put(iplongstar, iparr[2]);
+
+					String city = "";
+					int cityindex = iparr[2].indexOf("市");
+					if(provinceindex != -1 && cityindex != -1) {
+						city = iparr[2].substring(provinceindex+1, cityindex);
+					}
+					if(provinceindex == -1 && cityindex != -1) {
+						city = iparr[2].substring(0, cityindex);
+					}
+
+
+
+					bufferedWriter.write(iparr[0]+":"+iparr[1]+":"+iparr[2]+":"+iparr[3]+":"+province+":"+city+"\n");
+
+//					long iplongstar = ipToLong(iparr[0]);
+//					long iplongend	= ipToLong(iparr[1]);
+//
+//					if(iplongstar != endindex) {
+//						logger.error("file cunzhen_ip.data is illegal, ip not is not continuous. ip:{}", line);
+//						break;
 //					}
+//
+//					endindex = iplongend+1;
+//
+////					int shengindex = iparr[2].indexOf("省");
+////					if(shengindex != -1) {
+////						ipcountry.put(iplongstar, iparr[2].substring(0, shengindex));
+////					} else {
+//						ipcountry.put(iplongstar, iparr[2]);
+////					}
 				} else {
 					logger.error("file cunzhen_ip.data is illegal, has exist array length not equal 4.");
 					break;
@@ -107,6 +129,10 @@ public class ChunZhenIPMetadataParser {
 		try {
 			if(br != null) br.close();
 			if(fileReader != null) fileReader.close();
+
+
+			if(bufferedWriter != null) bufferedWriter.close();
+			if(fileWriter != null) fileWriter.close();
 		} catch (IOException e) {
 			logger.error("close io channel IOException : {}", e.getMessage());
 //			System.exit(0);

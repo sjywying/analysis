@@ -5,4 +5,6 @@ package com.analysis.common.weblog;
  */
 public interface Handler {
 
+    void handler(HandlerContext context);
+
 }

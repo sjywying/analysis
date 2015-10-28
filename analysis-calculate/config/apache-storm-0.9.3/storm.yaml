@@ -16,12 +16,12 @@
 
 ########### These MUST be filled in for a storm configuration
 storm.zookeeper.servers: 
-                - "118.192.72.149"
+                - "server-102"
 #     - "server2"
 
-storm.local.dir: "/wukong/data/apache-storm-0.9.3/workdir"
+storm.local.dir: "/wukong/data/apache-storm-0.9.4/workdir"
 
-nimbus.host: "172.168.1.98"
+nimbus.host: "server-98"
 
 supervisor.slots.ports: 
                 - 6700 
@@ -30,8 +30,6 @@ supervisor.slots.ports:
                 - 6703
                 - 6704
                 - 6705
-                - 6706
-                - 6707
 # 
 # 
 # ##### These may optionally be filled in:

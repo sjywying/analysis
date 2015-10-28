@@ -47,3 +47,9 @@ kafka_spout--->parser_bolt--->filter_bolt-------------------------------->persis
 	4. 存入redis 速度慢
 	5. 自动按月分表
 	6. 多个web程序启动会出现现成安全问题（数据重复插入mysql） 同时操作redis 都有此问题
+
+
+2015.05.06
+	1. 实现bitmap
+	2. 动态管理拓扑	// storm 无状态 可以随意停止 借助zk
+	3. fastdfs/fastdht 创建连接池

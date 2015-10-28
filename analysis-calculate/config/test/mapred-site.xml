@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+
+<!-- Do not modify this file directly.  Instead, copy entries that you -->
+<!-- wish to modify from this file into mapred-site.xml and change them -->
+<!-- there.  If mapred-site.xml does not already exist, create it.      -->
+
+<configuration>
+
+<!-- MR YARN Application properties -->
+
+<property>
+  <name>mapreduce.framework.name</name>
+  <value>yarn</value>
+  <description>The runtime framework for executing MapReduce jobs. Can be one of local, classic or yarn.
+  </description>
+</property>
+
+<!-- jobhistory properties -->
+<property>
+  <name>mapreduce.jobhistory.address</name>
+  <value>server-99:10020</value>
+  <description>MapReduce JobHistory Server IPC host:port</description>
+</property>
+
+<property>
+  <name>mapreduce.jobhistory.webapp.address</name>
+  <value>140.207.223.99:19888</value>
+  <description>MapReduce JobHistory Server Web UI host:port</description>
+</property>
+
+</configuration>

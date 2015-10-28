@@ -1,0 +1,14 @@
+*.DS_Store
+target/
+/nb-configuration.xml
+.idea/
+**/.idea/*
+/.idea
+/nbactions.xml
+/**/*.iml
+/.settings
+.classpath
+.project
+src/main/webapp/WEB-INF/lib/
+src/main/webapp/WEB-INF/classes/
+

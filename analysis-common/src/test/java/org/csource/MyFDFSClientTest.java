@@ -6,6 +6,8 @@
 
 package org.csource;
 
+import org.csource.common.DFSCustomIdClient;
+
 /**
  * My FastDFS test
  * 

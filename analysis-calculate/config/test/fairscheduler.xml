@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<allocations>
+
+  <queue name="tool">
+    <minResources>20000 mb, 5 vcores </minResources>
+    <maxResources>50000 mb, 15 vcores </maxResources>
+    <maxRunningApps>50</maxRunningApps>
+    <minSharePreemptionTimeout>300</minSharePreemptionTimeout>
+    <weight>1.0</weight>
+<!--
+    <aclSubmitApps>root,yarn,search,hdfs</aclSubmitApps>
+-->
+  </queue>
+
+</allocations>

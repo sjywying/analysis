@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding" useUTFGuessing="true" native2AsciiForPropertiesFiles="false" defaultCharsetForPropertiesFiles="UTF-8">
+    <file url="file://$PROJECT_DIR$/../RoaringBitmap" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/analysis-calculate" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/analysis-common" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/analysis-common/src/main/java/com/analysis/common/config/ImmutableConfiguration.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/analysis-showcase" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/analysis-web" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../arithmetic/.gitignore" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../extendedset" charset="UTF-8" />
+    <file url="PROJECT" charset="UTF-8" />
+  </component>
+</project>

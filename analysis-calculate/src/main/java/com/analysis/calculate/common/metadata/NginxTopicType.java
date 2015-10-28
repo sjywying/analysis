@@ -9,6 +9,7 @@ public enum NginxTopicType {
 //	MPAGE_DOWNLOAD("中间页下载", "3", "mpage_download"),
 //	INDEX_PAGE("首页", "4", "index_page"),
 	ACTIVE("激活", "~", "active"),
+	BITMAP("bitmap", "~", "nginx"),
 	cooperation("合作伙伴", "/ypsearch/urldeal", "cooperation");
 //	EXPRESS("首页", "6", "express");
 

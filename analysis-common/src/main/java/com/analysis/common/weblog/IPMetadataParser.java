@@ -45,61 +45,61 @@ public class IPMetadataParser {
 	}
 	
 	private static synchronized void parser() {
-		FileInputStream in = null;
-		BufferedReader br = null;
-		try {
-			in = new FileInputStream(new File(IPMetadataParser.class.getResource("/").getPath()+"dbipv4-city-2015-03.csv"));
-			br = new BufferedReader(new InputStreamReader(in, "utf-8"));
-			
-			long endindex = 0l;
-			String line="";
-			while ((line=br.readLine())!=null) {
-				Matcher m = addressPattern.matcher(line);
-				m.find();
-
-				if(m.groupCount() == 5) {
-					long iplongstar = ipToLong(m.group(1));
-					long iplongend	= ipToLong(m.group(2));
-
-					if(iplongstar != endindex) {
-						logger.error("file dbip-country.csv is illegal, ip not is not continuous. ip:{}", line);
-						break;
-					}
-
-					endindex = iplongend+1;
-					if("cn".equals(m.group(3).toLowerCase())) {
-						ipcountry.put(iplongstar, m.group(3).toLowerCase() + ":" + m.group(4).toLowerCase() + ":" + m.group(5).toLowerCase());
-					} else {
-						ipcountry.put(iplongstar, m.group(3).toLowerCase() + "::");
-					}
-				} else {
-					logger.error("file dbip-country.csv is illegal, has exist array length not equal 5.");
-					break;
-				}
-			}
-			
-			if(endindex-1 != MAX_IP_NUMBER) {
-				logger.error("file dbip-country.csv has readed. but last long number is {}, not equal 255.255.255.255 to number", endindex-1);
-			} else {
-				logger.debug("file dbip-country.csv has readed. last long number is {}", endindex-1);
-			}
-			isinit = true;
-		} catch (FileNotFoundException e) {
-			logger.error("FileNotFoundException message : {}", e.getMessage());
-//			System.exit(0);
-			isinit = false;
-		} catch (IOException e) {
-			logger.error("IOException message : {}", e.getMessage());
-//			System.exit(0);
-			isinit = false;
-		} finally {
-			try {
-				br.close();
-				in.close();
-			} catch (IOException e) {
-
-			}
-		}
+//		FileInputStream in = null;
+//		BufferedReader br = null;
+//		try {
+//			in = new FileInputStream(new File(IPMetadataParser.class.getResource("/").getPath()+"dbipv4-city-2015-03.csv"));
+//			br = new BufferedReader(new InputStreamReader(in, "utf-8"));
+//
+//			long endindex = 0l;
+//			String line="";
+//			while ((line=br.readLine())!=null) {
+//				Matcher m = addressPattern.matcher(line);
+//				m.find();
+//
+//				if(m.groupCount() == 5) {
+//					long iplongstar = ipToLong(m.group(1));
+//					long iplongend	= ipToLong(m.group(2));
+//
+//					if(iplongstar != endindex) {
+//						logger.error("file dbip-country.csv is illegal, ip not is not continuous. ip:{}", line);
+//						break;
+//					}
+//
+//					endindex = iplongend+1;
+//					if("cn".equals(m.group(3).toLowerCase())) {
+//						ipcountry.put(iplongstar, m.group(3).toLowerCase() + ":" + m.group(4).toLowerCase() + ":" + m.group(5).toLowerCase());
+//					} else {
+//						ipcountry.put(iplongstar, m.group(3).toLowerCase() + "::");
+//					}
+//				} else {
+//					logger.error("file dbip-country.csv is illegal, has exist array length not equal 5.");
+//					break;
+//				}
+//			}
+//
+//			if(endindex-1 != MAX_IP_NUMBER) {
+//				logger.error("file dbip-country.csv has readed. but last long number is {}, not equal 255.255.255.255 to number", endindex-1);
+//			} else {
+//				logger.debug("file dbip-country.csv has readed. last long number is {}", endindex-1);
+//			}
+//			isinit = true;
+//		} catch (FileNotFoundException e) {
+//			logger.error("FileNotFoundException message : {}", e.getMessage());
+////			System.exit(0);
+//			isinit = false;
+//		} catch (IOException e) {
+//			logger.error("IOException message : {}", e.getMessage());
+////			System.exit(0);
+//			isinit = false;
+//		} finally {
+//			try {
+//				br.close();
+//				in.close();
+//			} catch (IOException e) {
+//
+//			}
+//		}
 		
 		logger.debug("finish init ip treemap");
 	}

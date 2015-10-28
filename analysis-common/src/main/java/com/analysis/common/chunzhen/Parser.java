@@ -79,8 +79,8 @@ private static final Logger logger = LoggerFactory.getLogger(Parser.class);
         Inputter inputter = null;
         Outputter outputter = null;
         try {
-            inputter = new FileInputter("ip.log");
-            outputter = new FileOutputter("ip_out.txt");
+            inputter = new FileInputter("ip_20150713.txt");
+            outputter = new FileOutputter("ip_out_20150713.txt");
         } catch (Exception e) {
             e.printStackTrace();
         }

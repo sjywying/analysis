@@ -7,7 +7,7 @@ import com.analysis.common.utils.Strings;
  */
 public class IPMetadata {
 
-    private static final char SPLIT = ':';
+    private static final char SPLIT = '\t';
 
     private String startIp;
     private String endIp;
@@ -86,7 +86,7 @@ public class IPMetadata {
                 .append(country).append(SPLIT)
                 .append(province).append(SPLIT)
                 .append(city).append(SPLIT)
-                .append(address).append(';').append(netOperator)
+                .append(address)
                 .append("\n");
         return sb.toString();
     }

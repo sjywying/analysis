@@ -300,9 +300,9 @@ public class ServerGroup {
         }
     }
 
-    protected void finalize() throws Throwable {
-        this.closeAll();
-    }
+//    protected void finalize() throws Throwable {
+//        this.closeAll();
+//    }
 
     /**
      * print group info (for debug)

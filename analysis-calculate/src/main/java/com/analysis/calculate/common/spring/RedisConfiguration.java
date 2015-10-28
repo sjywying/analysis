@@ -11,7 +11,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 @Configuration
-@ComponentScan({ "com.winksi.calculate" })
+@ComponentScan({ "com.analysis.calculate" })
 @Import({ ConfigProperties.class })
 public class RedisConfiguration {
 
